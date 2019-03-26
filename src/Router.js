@@ -4,8 +4,8 @@ import Home from './Routes/Home'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { RootStoreProvider } from "./Stores";
-import Toast from "./Components/RouterComponents/Toast";
-import Navigator from "./Components/RouterComponents/Navigator";
+import Toast from "./Components/Router/Toast";
+import Navigator from "./Components/Router/Navigator";
 import "./Router.css"
 
 const theme = createMuiTheme({
