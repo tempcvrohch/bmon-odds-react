@@ -1,9 +1,19 @@
 import React, { useEffect } from 'react';
 import { RootStoreContext } from '../../Stores';
 import { useObserver } from 'mobx-react-lite'
+import { makeStyles } from '@material-ui/styles';
+import Paper from '@material-ui/core/Paper';
+import SimpleMatchTable from './SimpleMatchTable';
+
+const useStyles = makeStyles({
+    paper: {
+        maxWidth: 800
+    }
+})
 
 export default function Home() {
-    let { matchStore, router } = React.useContext(RootStoreContext);
+    const classes = useStyles()
+    let { matchStore } = React.useContext(RootStoreContext);
 
     useEffect(() => {
         matchStore.FetchLiveMatches()
@@ -11,7 +21,7 @@ export default function Home() {
 
     return useObserver(() => (
         <div>
-            {matchStore.length}
+            <SimpleMatchTable matches={matchStore.recentMatches.filter(m => m.live)}></SimpleMatchTable>
         </div>
     ));
 }

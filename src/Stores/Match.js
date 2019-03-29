@@ -6,7 +6,7 @@ class MatchStore {
     constructor(rootStore){
         this.rootStore = rootStore
         this.matches = [];
-        this.liveMatches = [];
+        this.recentMatches = [];
     }
 
     async FetchLiveMatches(){
@@ -15,13 +15,14 @@ class MatchStore {
             throw new Error(`FetchLiveMatches: non-200: ${res.status}`)
         }
         
-        this.liveMatches = await res.json()
-        return this.liveMatches
+        this.recentMatches = await res.json()
+        return this.recentMatches
     }
 }
 
 decorate(MatchStore, {
     matches: observable,
+    recentMatches: observable,
 })
 
 export default MatchStore
