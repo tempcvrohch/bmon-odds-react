@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from './Routes/Home'
+import Match from './Routes/Match'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { RootStoreProvider } from "./Stores";
@@ -29,6 +30,7 @@ export default function AppRouter() {
             <Navigator />
             <main className="main">
               <Route path="/" exact component={Home} />
+              <Route path="/match/:id" component={Match} />
             </main>
           </div>
         </RootStoreProvider>

@@ -9,14 +9,23 @@ class MatchStore {
         this.recentMatches = [];
     }
 
-    async FetchLiveMatches(){
+    async FetchRecentMatches(){
         let res = await fetch(`${Consts.API_HTTPS_URL}/matches/recent`)
         if(res.status !== 200){
-            throw new Error(`FetchLiveMatches: non-200: ${res.status}`)
+            throw new Error(`FetchRecentMatches: non-200: ${res.status}`)
         }
         
         this.recentMatches = await res.json()
         return this.recentMatches
+    }
+
+    async FetchMatch(id){
+        let res = await fetch(`${Consts.API_HTTPS_URL}/match/${id}`)
+        if(res.status !== 200){
+            throw new Error(`FetchMatch: non-200: ${res.status}`)
+        }
+        
+        return await res.json()
     }
 }
 

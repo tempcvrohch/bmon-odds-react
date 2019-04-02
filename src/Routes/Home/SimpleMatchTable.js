@@ -43,7 +43,7 @@ export default function SimpleMatchTable(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.matches.map(n => {
+                    {props.matches.sort((a, b) => a.leagueName.localeCompare(b.leagueName)).map(n => {
                         return (
                             <TableRow
                                 hover
@@ -53,7 +53,7 @@ export default function SimpleMatchTable(props) {
                                 <TableCell>{n.leagueName}</TableCell>
                                 <TableCell>{n.matchState.pointScore}</TableCell>
                             </TableRow>
-                        );
+                        )
                     })}
                 </TableBody>
             </Table>
