@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { RootStoreContext } from '../../Stores';
 import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
@@ -63,7 +61,6 @@ export default function MatchSummary(props) {
     const foundLeague = findLeagueIdentifier(props.match.leagueName.toLowerCase())
     const sets = parseSets(props.match.matchState.pointScore)
     const playerScores = parseIndividualSetScores(sets)
-    console.log(playerScores)
 
     return useObserver(() => (
         <Card className={classes.card}>
@@ -74,7 +71,8 @@ export default function MatchSummary(props) {
                 title={props.match.name}
                 subheader={props.match.leagueName}
             />
-            <div className={classes.scoreContainer}>
+            {/*TODO: fix child css */}
+            <div className={classes.scoreContainer}> 
                 <span className={classes.setScoreIndicator}>{playerScores[0]}</span>
                 <span className={classes.setScoreIndicator}>:</span>
                 <span className={classes.setScoreIndicator}>{playerScores[1]}</span>
@@ -82,7 +80,7 @@ export default function MatchSummary(props) {
             <CardContent>
                 <ul>
                     {sets.map(set => (
-                        <li><Typography component="p">
+                        <li key={set}><Typography component="p">
                             {set}
                         </Typography></li>
                     ), this)}

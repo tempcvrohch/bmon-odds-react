@@ -3,6 +3,7 @@ import { RootStoreContext } from '../../Stores';
 import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import MatchSummary from './MatchSummary'
+import SetsContainer from './SetsContainer'
 
 const useStyles = makeStyles({
     paper: {
@@ -16,7 +17,6 @@ export default function Home(props) {
     const [match, setMatch] = useState(null)
 
     useEffect(() => {
-        console.log(props)
         matchStore.FetchMatch(props.match.params.id).then(match => {
             setMatch(match)
         })
@@ -25,7 +25,10 @@ export default function Home(props) {
     return useObserver(() => (
         <div>
             {
-                match ? <MatchSummary match={match}></MatchSummary> : <span>loading...</span>
+                match ? <div>
+                    <MatchSummary match={match}></MatchSummary>
+                    <SetsContainer matchStates={match.matchStates}></SetsContainer>
+                </div> : <span>loading...</span>
             }
         </div>
     ));
