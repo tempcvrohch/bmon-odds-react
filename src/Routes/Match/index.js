@@ -6,8 +6,10 @@ import MatchSummary from './MatchSummary'
 import SetsContainer from './SetsContainer'
 
 const useStyles = makeStyles({
-    paper: {
-        maxWidth: 800
+    root: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        marginTop: 50
     }
 })
 
@@ -25,7 +27,7 @@ export default function Home(props) {
     return useObserver(() => (
         <div>
             {
-                match ? <div>
+                match ? <div className={classes.root}>
                     <MatchSummary match={match}></MatchSummary>
                     <SetsContainer matchStates={match.matchStates}></SetsContainer>
                 </div> : <span>loading...</span>

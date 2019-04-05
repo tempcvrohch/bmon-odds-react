@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 const useStyles = makeStyles({
     card: {
         width: 400,
+        height: 300
     },
     scoreContainer: {
         width: 400,
