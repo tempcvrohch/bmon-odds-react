@@ -28,7 +28,6 @@ function splitMatchMutationsOnSets(matchMutations){
 export default function SetContainer(props) {
     const classes = useStyles()
     const setMutations = splitMatchMutationsOnSets(props.matchStates)
-    console.log(setMutations)
 
     return useObserver(() => (
         <div>
