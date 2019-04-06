@@ -1,63 +1,60 @@
 import React from "react";
+import { makeStyles } from '@material-ui/styles';
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 import { Link } from "react-router-dom";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PermIdentity from '@material-ui/icons/PermIdentity';
-import Assignment from '@material-ui/icons/Assignment';
 import Dashboard from '@material-ui/icons/Dashboard';
-import AccountBox from '@material-ui/icons/AccountBox';
-import SettingsInputHdmi from '@material-ui/icons/SettingsInputHdmi';
 import { RootStoreContext } from '../../Stores';
 import { useObserver } from 'mobx-react-lite'
 
+const useStyles = makeStyles({
+    drawer: {
+        width: 180
+    },
+    drawerThin: {
+        width: 50,
+    },
+});
+
 function DrawerList() {
     const rootStore = React.useContext(RootStoreContext);
+    const classes = useStyles();
+    const matches = useMediaQuery('(min-width:600px)'); //TODO: figure out why this duplication is needed
 
     return useObserver(() => (
-        <nav>
+        <nav className={matches ? classes.drawer : classes.drawerThin}>
             <List>
-                <ListItem button component={Link} to="/dashboard">
+                <ListItem button component={Link} to="/">
                     <ListItemIcon>
                         <Dashboard />
                     </ListItemIcon>
                     <ListItemText>
-                        Dashboard
-            </ListItemText>
+                        Games
+                    </ListItemText>
                 </ListItem>
-                <ListItem button component={Link} to="/accounts">
-                    <ListItemIcon>
-                        <AccountBox />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Account
-            </ListItemText>
-                </ListItem>
-                <ListItem button component={Link} to="/tasks">
-                    <ListItemIcon>
-                        <Assignment />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Tasks
-            </ListItemText>
-                </ListItem>
-                <ListItem button component={Link} to="/plugin">
-                    <ListItemIcon>
-                        <SettingsInputHdmi />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Plugin
-            </ListItemText>
-                </ListItem>
-                <ListItem button onClick={() => rootStore.userStore.logout()}>
-                    <ListItemIcon>
-                        <PermIdentity />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Logout
-            </ListItemText>
-                </ListItem>
+                <Divider />
+                {rootStore.userStore.loggedIn ?
+                    <ListItem button onClick={() => rootStore.userStore.logout()}>
+                        <ListItemIcon>
+                            <PermIdentity />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Logout
+                    </ListItemText>
+                    </ListItem> :
+                    <ListItem button component={Link} to="/login">
+                        <ListItemIcon>
+                            <PermIdentity />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Login
+                    </ListItemText>
+                    </ListItem>}
             </List>
         </nav>
     ))

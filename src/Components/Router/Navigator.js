@@ -1,21 +1,18 @@
 import React from "react";
-import Drawer from '@material-ui/core/Drawer';
+import { makeStyles } from '@material-ui/styles';
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
+import Drawer from '@material-ui/core/Drawer';
 import { RootStoreContext } from '../../Stores';
 import { useObserver } from 'mobx-react-lite'
 import { __RouterContext } from "react-router"
 import DrawerList from "./DrawerList";
-import { makeStyles } from '@material-ui/styles';
 
-const drawerWidth = 200;
-const drawerWidthThin = 50;
 const useStyles = makeStyles({
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+    width: 180
   },
-  drawerPaperThin: {
-    width: drawerWidthThin,
+  drawerThin: {
+    width: 50,
   },
 });
 
@@ -30,7 +27,8 @@ function Navigator() {
       <Drawer
         className={matches ? classes.drawer : classes.drawerThin}
         variant="persistent"
-        open={rootStore.userStore.loggedIn}
+        open={true}
+        // open={rootStore.userStore.loggedIn}
         anchor="left"
       >
         <DrawerList></DrawerList>

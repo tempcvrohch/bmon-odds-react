@@ -6,11 +6,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
+import moment from 'moment';
 
 const useStyles = makeStyles({
     card: {
         width: 400,
-        height: 300
+        height: 350
     },
     scoreContainer: {
         width: 400,
@@ -67,7 +68,7 @@ export default function MatchSummary(props) {
         <Card className={classes.card}>
             <CardHeader
                 avatar={
-                    <Avatar alt={'L'} src={`/img/${foundLeague}.png`} />
+                    <Avatar alt={'L'} src={`/img/league_logos/${foundLeague}.png`} />
                 }
                 title={props.match.name}
                 subheader={props.match.leagueName}
@@ -79,6 +80,9 @@ export default function MatchSummary(props) {
                 <span className={classes.setScoreIndicator}>{playerScores[1]}</span>
             </div>
             <CardContent>
+                <span>
+                    Started: {moment(new Date(props.match.createdAt)).fromNow()} {/* moment doesn't parse java dates correctly */}
+                </span>
                 <ul>
                     {sets.map(set => (
                         <li key={set}><Typography component="p">

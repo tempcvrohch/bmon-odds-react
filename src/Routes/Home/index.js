@@ -3,10 +3,15 @@ import { RootStoreContext } from '../../Stores';
 import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import SimpleMatchTable from './SimpleMatchTable';
+import SportList from './SportList';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const useStyles = makeStyles({
-    paper: {
-        maxWidth: 800
+    root: {
+        marginTop: 50,
+        display: 'flex',
+        justifyContent: 'center'
     }
 })
 
@@ -20,7 +25,16 @@ export default function Home() {
 
     return useObserver(() => (
         <div>
-            <SimpleMatchTable matches={matchStore.recentMatches.filter(m => m.live)}></SimpleMatchTable>
+            <AppBar position="static">
+                <Toolbar></Toolbar>
+            </AppBar>
+            <div className={classes.root}>
+                <div>
+                    <SportList></SportList>
+                    <SimpleMatchTable matches={matchStore.recentMatches.filter(m => m.live)}></SimpleMatchTable>
+                </div>
+            </div>
         </div>
+
     ));
 }
