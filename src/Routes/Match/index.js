@@ -4,6 +4,7 @@ import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import MatchSummary from './MatchSummary'
 import SetsContainer from './SetsContainer'
+import Betslip from './Betslip';
 
 const useStyles = makeStyles({
     root: {
@@ -28,7 +29,10 @@ export default function Home(props) {
         <div>
             {
                 match ? <div className={classes.root}>
-                    <MatchSummary match={match}></MatchSummary>
+                    <div>
+                        <MatchSummary match={match}></MatchSummary>
+                        <Betslip match={match}></Betslip>
+                    </div>
                     <SetsContainer matchStates={match.matchStates}></SetsContainer>
                 </div> : <span>loading...</span>
             }

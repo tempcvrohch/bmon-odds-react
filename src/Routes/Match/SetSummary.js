@@ -50,7 +50,6 @@ export default function SetSummary(props) {
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState(null);
     let games = splitSetMutationsInGames(props.mutations)
-    console.log(games)
 
     const onPanelClick = () => {
         setExpanded(!expanded);

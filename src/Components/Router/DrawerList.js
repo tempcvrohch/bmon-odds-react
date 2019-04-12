@@ -34,7 +34,7 @@ function DrawerList() {
                         <Dashboard />
                     </ListItemIcon>
                     <ListItemText>
-                        Games
+                        Matches
                     </ListItemText>
                 </ListItem>
                 <Divider />

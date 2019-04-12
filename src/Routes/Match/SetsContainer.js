@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import SetSummary from './SetSummary';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const useStyles = makeStyles({
-    
+    toolbar: {
+        color: '#fff',
+        backgroundColor: '#2C4770',
+    }
 });
 
 function splitMatchMutationsOnSets(matchMutations){
@@ -31,6 +35,7 @@ export default function SetContainer(props) {
 
     return useObserver(() => (
         <div>
+            <Toolbar className={classes.toolbar}>Set Summaries</Toolbar>
             {setMutations.map((setMutationArray, ind) => (
                 <SetSummary key={ind} setIndex={ind} mutations={setMutationArray}></SetSummary>
             ))}

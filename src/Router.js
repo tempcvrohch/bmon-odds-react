@@ -10,6 +10,7 @@ import Navigator from "./Components/Router/Navigator";
 import Home from './Routes/Home'
 import Match from './Routes/Match'
 import Login from "./Routes/Login";
+import Register from "./Routes/Register";
 
 import "./Router.css"
 
@@ -34,6 +35,7 @@ export default function AppRouter() {
             <Navigator />
             <main className="main">
               <Route path="/" exact component={Home} />
+              <Route path="/register" exact component={Register} />
               <Route path="/login" component={Login} />
               <Route path="/match/:id" component={Match} />
             </main>

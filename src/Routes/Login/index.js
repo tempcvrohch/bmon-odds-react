@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/styles';
 import LatestChanges from './LatestChanges';
+import Consts from '../../Consts';
 
 const useStyles = makeStyles({
     loginForm: {
@@ -58,7 +59,7 @@ export default function Login() {
     let { accountStore, userStore, toastStore } = React.useContext(RootStoreContext);
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        userName: '',
+        username: '',
         password: '',
     });
 
@@ -71,14 +72,12 @@ export default function Login() {
     const submitLogin = () => {
         setLoading(true)
 
-        userStore.setCredentials(values.userName, values.password)
-        accountStore.fetchAccounts().then(() => {
-            toastStore.snackbarSuccess('Logged in!')
+        userStore.Login(values).then(() => {
+            toastStore.snackbarSuccess('Logged in successfully!')
             setLoading(false)
-            userStore.loggedIn = true;
         }).catch((e) => {
-            console.log('submitLogin: catch', e)
-            toastStore.snackbarError('Invalid credentials.')
+            console.error(e)
+            toastStore.snackbarError('Wrong usr/psw')
             setLoading(false)
         })
     }
@@ -104,7 +103,7 @@ export default function Login() {
                                             label="Username"
                                             type="text"
                                             margin="normal"
-                                            onChange={handleChange('userName')}
+                                            onChange={handleChange('username')}
                                         />
                                     </Grid>
                                     <Grid item>
@@ -130,7 +129,7 @@ export default function Login() {
                     }
                 </Paper>
                 <div className={classes.footer}>
-                    <span>Bmon Odds v0.1</span>
+                    <span>Bmon Odds v{Consts.VERSION}</span>
                 </div>
             </div>
         </Grid>
