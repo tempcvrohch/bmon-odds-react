@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PermIdentity from '@material-ui/icons/PermIdentity';
+import ListIcon from '@material-ui/icons/List';
 import Dashboard from '@material-ui/icons/Dashboard';
 import { RootStoreContext } from '../../Stores';
 import { useObserver } from 'mobx-react-lite'
@@ -37,24 +38,39 @@ function DrawerList() {
                         Matches
                     </ListItemText>
                 </ListItem>
-                <Divider />
                 {rootStore.userStore.loggedIn ?
-                    <ListItem button onClick={() => rootStore.userStore.logout()}>
-                        <ListItemIcon>
-                            <PermIdentity />
-                        </ListItemIcon>
-                        <ListItemText>
-                            Logout
-                    </ListItemText>
-                    </ListItem> :
-                    <ListItem button component={Link} to="/login">
-                        <ListItemIcon>
-                            <PermIdentity />
-                        </ListItemIcon>
-                        <ListItemText>
-                            Login
-                    </ListItemText>
-                    </ListItem>}
+                    <div>
+                        <ListItem button component={Link} to="/bets">
+                            <ListItemIcon>
+                                <ListIcon />
+                            </ListItemIcon>
+                            <ListItemText>
+                                Bets
+                        </ListItemText>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button onClick={() => rootStore.userStore.logout()}>
+                            <ListItemIcon>
+                                <PermIdentity />
+                            </ListItemIcon>
+                            <ListItemText>
+                                Logout
+                            </ListItemText>
+                        </ListItem>
+                    </div>
+                    :
+                    <div>
+                        <Divider />
+                        <ListItem button component={Link} to="/login">
+                            <ListItemIcon>
+                                <PermIdentity />
+                            </ListItemIcon>
+                            <ListItemText>
+                                Login
+                            </ListItemText>
+                        </ListItem>
+                    </div>
+                }
             </List>
         </nav>
     ))
