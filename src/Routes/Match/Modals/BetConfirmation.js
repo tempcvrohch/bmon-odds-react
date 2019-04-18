@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 export default function BetConfirmation(props) {
     const classes = useStyles()
-    const { betStore, toastStore } = React.useContext(RootStoreContext);
+    const { betStore, toastStore, userStore } = React.useContext(RootStoreContext);
     const [loading, setLoading] = useState(false)
 
     const submit = () => {
@@ -29,6 +29,7 @@ export default function BetConfirmation(props) {
 
         betStore.PlaceBet(props.modalDetails).then(() => {
             toastStore.snackbarSuccess(`Bet placed successfully!`)
+            userStore.user.pendingBetsAmount++
             closeModal()
         }).catch(e => {
             if(!e.message.includes('401')){

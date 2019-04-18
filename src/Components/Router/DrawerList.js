@@ -28,6 +28,9 @@ function DrawerList() {
     const classes = useStyles();
     const matches = useMediaQuery('(min-width:600px)'); //TODO: figure out why this duplication is needed
 
+    const isBadgeInvisible = () => !rootStore.userStore.user || rootStore.userStore.user.pendingBetsAmount === 0
+    const badgeContent = () => rootStore.userStore.user ? rootStore.userStore.user.pendingBetsAmount: 0
+
     return useObserver(() => (
         <nav className={matches ? classes.drawer : classes.drawerThin}>
             <List>
@@ -43,7 +46,7 @@ function DrawerList() {
                     <div>
                         <ListItem button component={Link} to="/bets">
                             <ListItemIcon>
-                                <Badge className={classes.margin} invisible={!rootStore.userStore.user || rootStore.userStore.user.pendingBetsAmount === 0} badgeContent={rootStore.userStore.user ? rootStore.userStore.user.pendingBetsAmount: 0} color="secondary">
+                                <Badge className={classes.margin} invisible={isBadgeInvisible()} badgeContent={badgeContent()} color="secondary">
                                     <ListIcon />
                                 </Badge>
                             </ListItemIcon>
