@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
+import Badge from '@material-ui/core/Badge';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PermIdentity from '@material-ui/icons/PermIdentity';
@@ -42,7 +43,9 @@ function DrawerList() {
                     <div>
                         <ListItem button component={Link} to="/bets">
                             <ListItemIcon>
-                                <ListIcon />
+                                <Badge className={classes.margin} invisible={!rootStore.userStore.user || rootStore.userStore.user.pendingBetsAmount === 0} badgeContent={rootStore.userStore.user ? rootStore.userStore.user.pendingBetsAmount: 0} color="secondary">
+                                    <ListIcon />
+                                </Badge>
                             </ListItemIcon>
                             <ListItemText>
                                 Bets

@@ -4,8 +4,6 @@ import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import SimpleMatchTable from './SimpleMatchTable';
 import SportList from './SportList';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 
 const useStyles = makeStyles({
     root: {
@@ -25,9 +23,6 @@ export default function Home() {
 
     return useObserver(() => (
         <div>
-            <AppBar position="static">
-                <Toolbar></Toolbar>
-            </AppBar>
             <div className={classes.root}>
                 <div>
                     <SportList></SportList>

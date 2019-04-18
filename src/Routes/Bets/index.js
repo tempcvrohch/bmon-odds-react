@@ -46,7 +46,7 @@ export default function Bets() {
                         <Toolbar className={classes.toolbar}>
                             <Typography variant="h6" color="inherit">
                                 Pending
-                    </Typography>
+                            </Typography>
                         </Toolbar>
                         <BetsList bets={bets.filter(b => b.status === 'PENDING')}></BetsList>
                     </Paper>

@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 import { RootStoreProvider } from "./Stores";
 import Toast from "./Components/Router/Toast";
+import UserAppBar from "./Components/Router/UserAppBar";
 import Navigator from "./Components/Router/Navigator";
 
 import Home from './Routes/Home'
@@ -35,6 +37,7 @@ export default function AppRouter() {
             <Toast />
             <Navigator />
             <main className="main">
+              <UserAppBar/>
               <Route path="/" exact component={Home} />
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />

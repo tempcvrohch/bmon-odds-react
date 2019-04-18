@@ -4,7 +4,10 @@ import Consts from '../Consts'
 class UserStore {
     constructor(rootStore) {
         this.rootStore = rootStore
+        this.user = null;
         this.loggedIn = false;
+
+        this.GetCurrentUserSession()
     }
 
     async Register(newUser) {
@@ -45,6 +48,18 @@ class UserStore {
         this.loggedIn = false;
     }
 
+    async GetCurrentUserSession() {
+        let res = await fetch(`${Consts.API_HTTPS_URL}/user/session`, {
+            method: 'GET',
+            credentials: 'include',
+        })
+        if(res.status === 200){
+            this.loggedIn = true
+            this.user = await res.json()
+            console.log(this.user)
+        }
+    }
+
     async GetCurrentUserBets() {
         let res = await fetch(`${Consts.API_HTTPS_URL}/user/bets/pending`, {
             method: 'GET',
@@ -63,8 +78,10 @@ class UserStore {
 
 decorate(UserStore, {
     loggedIn: observable,
+    user: observable,
     Register: action,
     Login: action,
+    GetCurrentUserSession: action,
     GetCurrentUserBets: action,
 })
 
