@@ -57,7 +57,7 @@ export default function Betslip(props) {
     }, [])
 
     useEffect(() => {
-        setBetPlaceButtonEnabled(selectedBetIndex !== null && stakeAmount > 0.25)
+        setBetPlaceButtonEnabled(selectedBetIndex !== null && stakeAmount > 0.25 && stakeAmount < 100)
     })
 
     const continueToModal = () => {
@@ -75,7 +75,7 @@ export default function Betslip(props) {
             {oddDetails ? <div>
                 <div className={classes.betOptions}>
                     {oddDetails.map((oddDetail, i) => (
-                        <Button key={oddDetail.betId} className={classes.betOption} variant={selectedBetIndex === i ? 'outlined' : 'contained'} size="large" color="secondary" onClick={() => setSelectedBetIndex(i)}>
+                        <Button key={oddDetail.betId} disabled={oddDetail.odd === '999/1'} className={classes.betOption} variant={selectedBetIndex === i ? 'outlined' : 'contained'} size="large" color="secondary" onClick={() => setSelectedBetIndex(i)}>
                             {oddDetail.odd}
                         </Button>
                     ))}
