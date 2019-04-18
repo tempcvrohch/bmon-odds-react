@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import Card from '@material-ui/core/Card';
@@ -68,7 +68,7 @@ export default function MatchSummary(props) {
         <Card className={classes.card}>
             <CardHeader
                 avatar={
-                    <Avatar alt={'L'} src={`/img/league_logos/${foundLeague}.png`} />
+                    <Avatar alt={''} src={`/img/league_logos/${foundLeague}.png`} />
                 }
                 title={props.match.name}
                 subheader={props.match.leagueName}

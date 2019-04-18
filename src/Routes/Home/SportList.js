@@ -50,7 +50,7 @@ export default function SportList() {
             <GridList className={classes.gridList} cols={3}>
                 {sports.map(sport => (
                     <GridListTile key={sport.key}>
-                        <img className={classes.tileImg} src={sport.img}></img>
+                        <img alt={''} className={classes.tileImg} src={sport.img}></img>
                         <GridListTileBar
                             title={sport.name}
                             classes={{

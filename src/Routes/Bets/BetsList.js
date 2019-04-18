@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { RootStoreContext } from '../../Stores';
+import React from 'react';
 import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import Table from '@material-ui/core/Table';
@@ -36,7 +35,6 @@ const useStyles = makeStyles({
 })
 
 export default function BetsList(props) {
-    let { router } = React.useContext(RootStoreContext);
     const classes = useStyles()
     const columns = [{
         key: 'created',

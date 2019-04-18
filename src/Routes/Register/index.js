@@ -56,7 +56,7 @@ const useStyles = makeStyles({
 
 //mostly a copypaste from ../Login, in the real world the register page would look different 
 export default function Register() {
-    let { accountStore, userStore, toastStore } = React.useContext(RootStoreContext);
+    let { userStore, toastStore } = React.useContext(RootStoreContext);
     const classes = useStyles();
     const [values, setValues] = React.useState({
         username: '',

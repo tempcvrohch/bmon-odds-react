@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useObserver } from 'mobx-react-lite'
 import { makeStyles } from '@material-ui/styles';
 import Paper from '@material-ui/core/Paper';

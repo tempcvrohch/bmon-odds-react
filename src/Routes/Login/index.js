@@ -56,7 +56,7 @@ const useStyles = makeStyles({
 });
 
 export default function Login() {
-    let { accountStore, userStore, toastStore } = React.useContext(RootStoreContext);
+    let { userStore, toastStore } = React.useContext(RootStoreContext);
     const classes = useStyles();
     const [values, setValues] = React.useState({
         username: '',
