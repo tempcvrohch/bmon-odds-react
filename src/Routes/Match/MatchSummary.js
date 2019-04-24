@@ -61,7 +61,7 @@ function parseIndividualSetScores(sets) {
 export default function MatchSummary(props) {
     const classes = useStyles()
     const foundLeague = findLeagueIdentifier(props.match.leagueName.toLowerCase())
-    const sets = parseSets(props.match.matchState.pointScore)
+    const sets = parseSets(props.match.matchState.setScore)
     const playerScores = parseIndividualSetScores(sets)
 
     return useObserver(() => (

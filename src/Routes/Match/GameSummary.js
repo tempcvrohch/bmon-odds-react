@@ -25,7 +25,7 @@ export default function GameSummary(props) {
 
     return useObserver(() => (
         <div className={classes.root}>
-            <span className={classes.gameIndicator}>{props.game.gameScore}</span>
+            <span className={classes.gameIndicator}>{props.game.setScore}</span>
             <table className={classes.table}>
                 <tbody>
                     <tr>

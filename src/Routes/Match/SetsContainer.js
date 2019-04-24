@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 function splitMatchMutationsOnSets(matchMutations){
-    let lastSetScore = matchMutations[matchMutations.length - 1].pointScore
+    let lastSetScore = matchMutations[matchMutations.length - 1].setScore
     if(!lastSetScore.includes(',')){
         return [matchMutations] //this match only has 1 set (so far)
     }
@@ -22,7 +22,7 @@ function splitMatchMutationsOnSets(matchMutations){
     lastSets.forEach(() => matchMutationsOnSets.push([]))
 
     matchMutations.forEach((mut) => {
-        let ind = (mut.pointScore.match(/,/g)||[]).length
+        let ind = (mut.setScore.match(/,/g)||[]).length
         matchMutationsOnSets[ind].push(mut)
     })
 

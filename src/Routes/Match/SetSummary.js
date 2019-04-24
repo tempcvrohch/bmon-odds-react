@@ -26,19 +26,19 @@ function splitSetMutationsInGames(setMutations) {
     setMutations.forEach(mut => {
         if (!currentGame) {
             currentGame = {
-                gameScore: mut.pointScore,
-                pointMutations: [mut.setScore]
+                setScore: mut.setScore,
+                pointMutations: [mut.pointScore]
             }
             return
         }
 
-        if (mut.pointScore === currentGame.gameScore) {
-            currentGame.pointMutations.push(mut.setScore)
+        if (mut.setScore === currentGame.setScore) {
+            currentGame.pointMutations.push(mut.pointScore)
         } else {
             games.push(currentGame)
             currentGame = {
-                gameScore: mut.pointScore,
-                pointMutations: [mut.setScore]
+                setScore: mut.setScore,
+                pointMutations: [mut.pointScore]
             }
         }
     })
@@ -62,7 +62,7 @@ export default function SetSummary(props) {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.expandPanel}>
                 {games.map(game => (
-                    <GameSummary key={game.gameScore} game={game}></GameSummary>
+                    <GameSummary key={game.setScore} game={game}></GameSummary>
                 ))}
             </ExpansionPanelDetails>
         </ExpansionPanel>
