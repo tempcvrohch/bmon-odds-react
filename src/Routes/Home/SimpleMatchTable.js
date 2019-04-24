@@ -65,7 +65,7 @@ export default function SimpleMatchTable(props) {
                                 className={classes.row}>
                                 <TableCell>{n.name}</TableCell>
                                 <TableCell>{n.leagueName}</TableCell>
-                                <TableCell>{n.matchState.pointScore}</TableCell>
+                                <TableCell>{n.matchState.setScore}</TableCell>
                                 <TableCell>
                                     <IconButton className={classes.button} aria-label="details" onClick={() => router.history.push('/match/' + n.id)}>
                                         <Search />

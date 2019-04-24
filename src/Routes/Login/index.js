@@ -72,8 +72,9 @@ export default function Login() {
     const submitLogin = () => {
         setLoading(true)
 
-        userStore.Login(values).then(() => {
+        userStore.Login(values).then(async () => {
             toastStore.snackbarSuccess('Logged in successfully!')
+            await userStore.GetCurrentUserSession()
             setLoading(false)
         }).catch((e) => {
             console.error(e)

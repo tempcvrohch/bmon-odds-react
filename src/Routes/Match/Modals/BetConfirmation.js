@@ -30,6 +30,7 @@ export default function BetConfirmation(props) {
         betStore.PlaceBet(props.modalDetails).then(() => {
             toastStore.snackbarSuccess(`Bet placed successfully!`)
             userStore.user.pendingBetsAmount++
+            userStore.user.balance -= +props.modalDetails.stake
             closeModal()
         }).catch(e => {
             if(!e.message.includes('401')){
