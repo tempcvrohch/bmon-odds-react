@@ -19,19 +19,19 @@ export default function LatestChanges() {
                 <Typography variant="h4" color="inherit">
                     Latest Changes
                                     </Typography>
-                <Typography color="inherit">28/02/2019</Typography>
+                <Typography color="inherit">14/05/2019</Typography>
                 <ul>
-                    <li><Typography color="inherit">Various bug fixes</Typography></li>
-                    <li><Typography color="inherit">Updated BCM software</Typography></li>
+                    <li><Typography color="inherit">Final CV Version</Typography></li>
+                    <li><Typography color="inherit">etc etc etc...</Typography></li>
                 </ul>
-                <Typography color="inherit">08/02/2019</Typography>
+                <Typography color="inherit">12/04/2019</Typography>
                 <ul>
-                    <li><Typography color="inherit">Launched new portal</Typography></li>
-                    <li><Typography color="inherit">Updated BCM software</Typography></li>
+                    <li><Typography color="inherit">etc etc etc...</Typography></li>
+                    <li><Typography color="inherit">etc etc etc...</Typography></li>
                 </ul>
-                <Typography color="inherit">20/01/2019</Typography>
+                <Typography color="inherit">02/03/2019</Typography>
                 <ul>
-                    <li><Typography color="inherit">Started work on new portal</Typography></li>
+                    <li><Typography color="inherit">etc etc etc...</Typography></li>
                 </ul>
             </Grid>
         </Grid>
