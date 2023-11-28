@@ -7,6 +7,10 @@ import replace from '@rollup/plugin-replace';
 export default defineConfig({
   server: {
     port: 3000,
+    hmr: true,
+    watch: {
+      usePolling: true,
+    },
   },
   plugins: [
     replace({

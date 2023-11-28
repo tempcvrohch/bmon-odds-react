@@ -11,19 +11,19 @@ const GameSummary = observer((props: {game: Game}) => {
     <div>
       <span
         css={css`
-          fontweight: 'bold';
+          font-weight: 'bold';
         `}
       >
         {props.game.setScore}
       </span>
       <table
         css={css`
-          margin: 5,
-          borderCollapse: 'collapse',
-          borderStyle: 'hidden',
+          margin: 5px;
+          border-collapse: 'collapse';
+          border-style: 'hidden';
           '& td': {
-            border: '1px solid black',
-            padding: 5,
+            border: '1px solid black';
+            padding: 5px;
           },
         `}
       >

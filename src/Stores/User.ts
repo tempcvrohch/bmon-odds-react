@@ -36,8 +36,8 @@ class UserStore {
     formData.append('username', loginUser.username);
     formData.append('password', loginUser.password);
 
-    console.log(`${API_HTTPS_URL}/login`);
-    let res = await fetch(`${API_HTTPS_URL}/login`, {
+    console.log(`${API_HTTPS_URL}/auth/login`);
+    let res = await fetch(`${API_HTTPS_URL}/auth/login`, {
       method: 'POST',
       credentials: 'include',
       headers: {

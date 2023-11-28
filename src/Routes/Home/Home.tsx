@@ -16,9 +16,9 @@ const Home = observer(() => {
     <div>
       <div
         css={css`
-          marginTop: 50,
-          display: 'flex',
-          justifyContent: 'center',
+          margin-top: 50px;
+          display: 'flex';
+          justify-content: 'center';
         `}
       >
         <div>

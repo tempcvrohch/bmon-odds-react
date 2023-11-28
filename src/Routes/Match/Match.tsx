@@ -26,9 +26,9 @@ const Match = observer(() => {
       {match ? (
         <div
           css={css`
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            marginTop: 50,
+            display: 'flex';
+            justify-content: 'space-evenly';
+            margin-top: 50px;
           `}
         >
           <div>

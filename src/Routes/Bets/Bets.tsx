@@ -7,11 +7,13 @@ import { css } from '@emotion/react';
 import { Bet, BetStatus } from '../../Types/Models.js';
 import { Paper, Toolbar, Typography } from '@mui/material';
 
-
 const Bets = observer(() => {
   let { userStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
   const [bets, setBets] = useState<Bet[]>([]);
-  const toolbarCss = css`color: '#fff', backgroundColor: '#2C4770'`;
+  const toolbarCss = css`
+    color: '#fff';
+    background-color: '#2C4770';
+  `;
 
   useEffect(() => {
     userStore
@@ -32,9 +34,9 @@ const Bets = observer(() => {
   return (
     <div
       css={css`
-        marginTop: 50,
-        display: 'flex',
-        justifyContent: 'center',
+        margin-top: 50px;
+        display: 'flex';
+        justify-content: 'center';
       `}
     >
       <div>
