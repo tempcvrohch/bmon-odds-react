@@ -15,9 +15,14 @@ const DrawerList = observer(() => {
     rootStore.userStore.user ? rootStore.userStore.user.pendingBetsAmount : 0;
 
   return (
-    <nav css={css`width: {xs: 50, sm: 180`}>
+    <nav css={css`
+			width: 180px;
+
+			@media (max-width: 768px){
+				width: 50px;
+			}`}>
       <List>
-        <ListItem component={Link} to="/">
+        <ListItem sx={{color: 'white'}} component={Link} to="/">
           <ListItemIcon>
             <Dashboard />
           </ListItemIcon>
@@ -25,7 +30,7 @@ const DrawerList = observer(() => {
         </ListItem>
         {rootStore.userStore.loggedIn ? (
           <div>
-            <ListItem component={Link} to="/bets">
+            <ListItem sx={{color: 'white'}} component={Link} to="/bets">
               <ListItemIcon>
                 <Badge
                   sx={{ margin: 20 }}
@@ -48,7 +53,7 @@ const DrawerList = observer(() => {
         ) : (
           <div>
             <Divider />
-            <ListItem component={Link} to="/login">
+            <ListItem sx={{color: 'white'}} component={Link} to="/login">
               <ListItemIcon>
                 <PermIdentity />
               </ListItemIcon>

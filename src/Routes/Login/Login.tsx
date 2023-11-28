@@ -41,22 +41,19 @@ const Login = observer(() => {
       <div>
         <hgroup
           css={css`
-            marginTop: 50,
-            textAlign: 'center',
-            padding: 30,
-            background: '#2C4770',
-            color: '#fff',
+            margin-top: 50px;
+            text-align: 'center';
+            padding: 30px;
+            background: '#2C4770';
+            color: '#fff';
           `}
-        >
-          <Typography variant="h5" color="inherit">
-            {userStore.loggedIn ? 'Welcome' : 'Login'}
-          </Typography>
-        </hgroup>
+        ></hgroup>
         <Paper
-          css={css`
+          sx={{
             height: 500,
             width: 420,
-          `}
+            backgroundColor: '#202020;',
+          }}
         >
           {userStore.loggedIn ? (
             <LatestChanges />
@@ -64,10 +61,13 @@ const Login = observer(() => {
             <Grid container justifyContent="center">
               <Grid item>
                 <Grid item>
+                  <Typography variant="h5" color="inherit">
+                    Login
+                  </Typography>
                   <TextField
                     required
                     css={css`
-                      width: 300;
+                      width: 300px;
                     `}
                     label="Username"
                     type="text"
@@ -79,7 +79,7 @@ const Login = observer(() => {
                   <TextField
                     required
                     css={css`
-                      width: 300;
+                      width: 300px;
                     `}
                     label="Password"
                     type="password"
@@ -90,9 +90,9 @@ const Login = observer(() => {
                 <Grid item>
                   <div
                     css={css`
-                      display: 'flex',
-                      justifyContentContent: 'center',
-                      marginTop: 50,
+                      display: 'flex';
+                      justify-content: 'center';
+                      margin-top: 50px;
                     `}
                   >
                     <Button
@@ -107,11 +107,11 @@ const Login = observer(() => {
                         <CircularProgress
                           size={24}
                           css={css`
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            marginTop: -12,
-                            marginLeft: -12,
+                            position: 'absolute';
+                            top: '50%';
+                            left: '50%';
+                            margin-top: -12px;
+                            margin-left: -12px;
                           `}
                         />
                       )}
@@ -124,12 +124,12 @@ const Login = observer(() => {
         </Paper>
         <div
           css={css`
-            height: 30,
-            color: '#fff',
-            padding: 5,
-            opacity: 0.7,
-            textAlign: 'center',
-            background: '#2C4770',
+            height: 30px;
+            color: '#fff';
+            padding: 5px;
+            opacity: 0.7;
+            text-align: 'center';
+            background: '#2C4770';
           `}
         >
           <span>Bmon Odds v{VERSION}</span>

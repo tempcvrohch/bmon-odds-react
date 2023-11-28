@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite';
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
 
@@ -24,29 +25,15 @@ const sports = [
 
 const SportList = observer(() => {
   return (
-    <div
-      css={css`
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-      `}
-    >
-      <ImageList
-        css={css`
-          flexWrap: 'nowrap',
-          transform: 'translateZ(0)',
-        `}
-        cols={3}
-      >
+    <div>
+      <ImageList cols={3}>
         {sports.map((sport) => (
           <ImageListItem key={sport.key}>
             <img
               alt={''}
               css={css`
-                width: 260,
-                height: 146,
-                marginTop: 33,
+                width: 260px;
+                height: 146px;
               `}
               src={sport.img}
             ></img>

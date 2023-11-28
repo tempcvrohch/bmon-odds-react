@@ -5,8 +5,8 @@ import { css } from '@emotion/react';
 import { Match } from '../../Types/Models.js';
 
 const setScoreIndicatorStyle = css`
-  fontsize: 100;
-  margin: 10;
+  font-size: 100px;
+  margin: 10px;
 `;
 
 function findLeagueIdentifier(leagueName) {
@@ -63,9 +63,9 @@ const MatchSummary = observer((props: { match: Match }) => {
       {/*TODO: fix child css */}
       <div
         css={css`
-          width: 400,
-          height: 120,
-          textAlign: 'center',
+          width: 400px,
+          height: 120px,
+          text-align: 'center',
         `}
       >
         <span css={setScoreIndicatorStyle}>{playerScores[0]}</span>

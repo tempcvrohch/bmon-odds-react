@@ -4,17 +4,15 @@ import { Drawer } from '@mui/material';
 
 const Navigator = observer(() => {
   return (
-    <div>
       <Drawer
-        sx={{ width: { xs: 50, sm: 180 } }}
+        sx={{ width: { xs: 50, sm: 180 } , gridArea: 'aside'}}
         variant="persistent"
         open={true}
-        // open={rootStore.userStore.loggedIn}
         anchor="left"
+				className="aside"
       >
         <DrawerList></DrawerList>
       </Drawer>
-    </div>
   );
 });
 

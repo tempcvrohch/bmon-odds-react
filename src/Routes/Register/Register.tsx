@@ -54,11 +54,11 @@ const Register = observer(() => {
       <div>
         <hgroup
           css={css`
-            marginTop: 50,
-            textAlign: 'center',
-            padding: 30,
-            background: '#2C4770',
-            color: '#fff',
+            margin-top: 50px;
+            text-align: 'center';
+            padding: 30px;
+            background: '#2C4770';
+            color: '#fff';
           `}
         >
           <Typography variant="h5" color="inherit">
@@ -111,9 +111,9 @@ const Register = observer(() => {
               <Grid item>
                 <div
                   css={css`
-                    display: 'flex',
-                    justifyContent: 'center',
-                    marginTop: 50,
+                    display: 'flex';
+                    justify-content: 'center';
+                    margin-top: 50px;
                   `}
                 >
                   <Button
@@ -144,12 +144,12 @@ const Register = observer(() => {
         </Paper>
         <div
           css={css`
-            height: 30,
-            color: '#fff',
-            padding: 5,
-            opacity: 0.7,
-            textAlign: 'center',
-            background: '#2C4770',
+            height: 30px;
+            color: '#fff';
+            padding: 5px;
+            opacity: 0.7;
+            text-align: 'center';
+            background: '#2C4770';
           `}
         >
           <span>Bmon Odds v{VERSION}</span>

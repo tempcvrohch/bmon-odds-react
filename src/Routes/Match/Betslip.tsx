@@ -52,7 +52,7 @@ const Betslip = observer((props: { match: Match }) => {
   return (
     <Paper
       css={css`
-        margintop: 50;
+        margin-top: 50px;
       `}
     >
       <BetConfirmation
@@ -74,7 +74,7 @@ const Betslip = observer((props: { match: Match }) => {
           <div
             css={css`
               display: 'flex',
-              justifyContent: 'center',
+              justify-content: 'center',
             `}
           >
             {oddDetails.map((oddDetail, i) => (
@@ -82,8 +82,8 @@ const Betslip = observer((props: { match: Match }) => {
                 // key={oddDetail.betId} TODO: figure out what
                 disabled={oddDetail.odd === '999/1'}
                 css={css`
-                  margin: 20,
-                  padding: 15,
+                  margin: 20px,
+                  padding: 15px,
                 `}
                 variant={selectedBetIndex === i ? 'outlined' : 'contained'}
                 size="large"
@@ -97,13 +97,13 @@ const Betslip = observer((props: { match: Match }) => {
           <div
             css={css`
               display: 'flex',
-              justifyContent: 'space-evenly',
-              padding: 8,
+              justify-content: 'space-evenly',
+              padding: 8px,
             `}
           >
             <FormControl
               css={css`
-                width: 100;
+                width: 100px;
               `}
             >
               <InputLabel htmlFor="adornment-amount">Stake</InputLabel>
