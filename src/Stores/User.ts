@@ -18,7 +18,7 @@ class UserStore {
 
   @action
   async Register(newUser) {
-    let res = await fetch(`${API_HTTPS_URL}/register`, {
+    let res = await fetch(`${API_HTTPS_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -59,7 +59,7 @@ class UserStore {
   }
 
   async GetCurrentUserSession() {
-    let res = await fetch(`${API_HTTPS_URL}/user/session`, {
+    let res = await fetch(`${API_HTTPS_URL}/auth/session`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -72,7 +72,7 @@ class UserStore {
 
   @action
   async GetCurrentUserBets() {
-    let res = await fetch(`${API_HTTPS_URL}/user/bets/pending`, {
+    let res = await fetch(`${API_HTTPS_URL}/bets/pending`, {
       method: 'GET',
       credentials: 'include',
     });

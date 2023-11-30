@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import moment from 'moment';
+import { formatDistance, parseISO } from 'date-fns';
 import { Bet } from '../../Types/Models.js';
 
 const statusStyles = {
@@ -74,7 +74,7 @@ const BetsList = observer((props: { bets: Bet[] }) => {
                   backgroundColor: statusStyles['status' + b.status],
                 }}
               >
-                <TableCell>{moment(b.createdAt).fromNow()}</TableCell>
+                <TableCell>{formatDistance(parseISO(b.createdAt), new Date())}</TableCell>
                 <TableCell>{b.marketState.playerName}</TableCell>
                 <TableCell>{b.marketState.odd}</TableCell>
                 <TableCell>{b.marketState.marketName}</TableCell>
