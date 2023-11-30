@@ -1,10 +1,11 @@
 import { observable, action } from 'mobx';
 import { RootStore } from './Store.js';
+import { AlertColor } from '@mui/material';
 
 interface Toast {
   open: boolean;
   message: string;
-  variant: string;
+  variant: AlertColor;
 }
 
 class ToastStore {

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { Card, CardHeader, CardContent, Typography, Avatar } from '@mui/material';
-import moment from 'moment';
+import { formatDistance, parseISO } from 'date-fns';
 import { css } from '@emotion/react';
 import { Match } from '../../Types/Models.js';
 
@@ -73,10 +73,7 @@ const MatchSummary = observer((props: { match: Match }) => {
         <span css={setScoreIndicatorStyle}>{playerScores[1]}</span>
       </div>
       <CardContent>
-        <span>
-          Started: {moment(new Date(props.match.createdAt)).fromNow()}{' '}
-          {/* moment doesn't parse java dates correctly */}
-        </span>
+        <span>Started: {formatDistance(parseISO(props.match.createdAt), new Date())} </span>
         <ul>
           {sets.map(
             (set) => (

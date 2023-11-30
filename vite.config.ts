@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { defineConfig } from 'vite';
 import reactSupport from '@vitejs/plugin-react';
-import replace from '@rollup/plugin-replace';
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,13 +13,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    replace({
-      preventAssignment: true,
-      values: {
-        __DEV__: JSON.stringify(true),
-        'process.env.NODE_ENV': JSON.stringify('development'),
-      },
-    }),
     reactSupport({
       babel: {
         parserOpts: {
@@ -27,5 +20,6 @@ export default defineConfig({
         },
       },
     }),
+		visualizer(),
   ],
 });
