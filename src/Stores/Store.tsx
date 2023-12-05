@@ -27,4 +27,12 @@ function RootStoreProvider({ children }) {
   return <RootStoreContext.Provider value={store}>{children}</RootStoreContext.Provider>;
 }
 
+export function getCookieValueWithName(name: string): string {
+  const desiredCookie = document.cookie
+    .split(';')
+    .find((cookie) => cookie.trim().startsWith(name + '='));
+
+  return desiredCookie ? desiredCookie.split('=')[1] : '';
+}
+
 export { RootStore, RootStoreContext, RootStoreProvider };
