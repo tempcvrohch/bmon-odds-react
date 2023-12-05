@@ -1,12 +1,12 @@
 import { observable, action } from 'mobx';
-import { API_HTTPS_URL } from '../Constants/Constants.js';
-import { RootStore } from './Store.js';
+import { API_HTTPS_URL, HEADER_NAME_CSRF } from '../Constants/Constants.js';
+import { RootStore, getCookieValueWithName } from './Store.js';
 import { User } from '../Types/Models.js';
 
 class UserStore {
   rootStore: RootStore;
   @observable user: User | null;
-  @observable loggedIn: Boolean;
+  @observable loggedIn: boolean;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -18,10 +18,11 @@ class UserStore {
 
   @action
   async Register(newUser) {
-    let res = await fetch(`${API_HTTPS_URL}/auth/register`, {
+    const res = await fetch(`${API_HTTPS_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
       },
       body: JSON.stringify(newUser),
     });
@@ -32,16 +33,17 @@ class UserStore {
 
   @action
   async Login(loginUser) {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('username', loginUser.username);
     formData.append('password', loginUser.password);
 
     console.log(`${API_HTTPS_URL}/auth/login`);
-    let res = await fetch(`${API_HTTPS_URL}/auth/login`, {
+    const res = await fetch(`${API_HTTPS_URL}/auth/login`, {
       method: 'POST',
       credentials: 'include',
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
+        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
       },
       //body: new URLSearchParams(formData),
       body: formData,
@@ -59,9 +61,12 @@ class UserStore {
   }
 
   async GetCurrentUserSession() {
-    let res = await fetch(`${API_HTTPS_URL}/auth/session`, {
+    const res = await fetch(`${API_HTTPS_URL}/auth/session`, {
       method: 'GET',
       credentials: 'include',
+      headers: {
+        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
+      },
     });
     if (res.status === 200) {
       this.loggedIn = true;
@@ -72,9 +77,12 @@ class UserStore {
 
   @action
   async GetCurrentUserBets() {
-    let res = await fetch(`${API_HTTPS_URL}/bets/pending`, {
+    const res = await fetch(`${API_HTTPS_URL}/bets/pending`, {
       method: 'GET',
       credentials: 'include',
+      headers: {
+        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
+      },
     });
     if (res.status === 401) {
       this.rootStore.toastStore.snackbarWarning('Not logged in.');
