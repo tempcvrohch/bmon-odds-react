@@ -32,11 +32,11 @@ function parseSets(setScore) {
 }
 
 function parseIndividualSetScores(sets) {
-  let playerSetScores = [0, 0];
+  const playerSetScores = [0, 0];
 
   sets.forEach((set) => {
-    let splitSet = set.split('-');
-    let setWinnerIndex = +splitSet[0] > +splitSet[1] ? 0 : 1;
+    const splitSet = set.split('-');
+    const setWinnerIndex = +splitSet[0] > +splitSet[1] ? 0 : 1;
     playerSetScores[setWinnerIndex]++;
   });
 

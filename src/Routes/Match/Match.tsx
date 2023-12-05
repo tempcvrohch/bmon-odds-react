@@ -6,7 +6,6 @@ import SetsContainer from './SetsContainer.js';
 import Betslip from './Betslip.js';
 import { Match as MatchModel } from '../../Types/Models.js';
 import { css } from '@emotion/react';
-import { Game } from './GameSummary.js';
 import { useParams } from 'react-router-dom';
 
 const Match = observer(() => {

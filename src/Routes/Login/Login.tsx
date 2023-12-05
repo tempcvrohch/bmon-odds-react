@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 import { Button, CircularProgress, Grid, Paper, TextField, Typography } from '@mui/material';
 
 const Login = observer(() => {
-  let { userStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
+  const { userStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
   const [values, setValues] = React.useState({
     username: '',
     password: '',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import {Accordion ,AccordionSummary ,AccordionDetails ,Typography } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import GameSummary, { Game } from './GameSummary.js';
 import { MatchState } from '../../Types/Models.js';
 import { ExpandMore } from '@mui/icons-material';
@@ -8,7 +8,7 @@ import { ExpandMore } from '@mui/icons-material';
 const numberSuffixes = ['st', 'nd', 'rd', 'th', 'th'];
 
 function splitSetMutationsInGames(setMutations) {
-  let games: Game[] = [];
+  const games: Game[] = [];
   let currentGame: Game;
 
   setMutations.forEach((mut) => {
@@ -34,9 +34,9 @@ function splitSetMutationsInGames(setMutations) {
   return games;
 }
 
-const SetSummary = observer((props: {setIndex: number, mutations: MatchState[][]}) => {
-    const [expanded, setExpanded] = React.useState(false);
-  let games = splitSetMutationsInGames(props.mutations);
+const SetSummary = observer((props: { setIndex: number; mutations: MatchState[][] }) => {
+  const [expanded, setExpanded] = React.useState(false);
+  const games = splitSetMutationsInGames(props.mutations);
 
   const onPanelClick = () => {
     setExpanded(!expanded);

@@ -16,7 +16,7 @@ class MatchStore {
 
   @action
   async FetchRecentMatches(): Promise<Match[]> {
-    let res = await fetch(`${API_HTTPS_URL}/matches/recent`, {}); //credentials: 'include'?
+    const res = await fetch(`${API_HTTPS_URL}/matches/recent`, {}); //credentials: 'include'?
     if (res.status !== 200) {
       throw new Error(`FetchRecentMatches: non-200: ${res.status}`);
     }
@@ -26,7 +26,7 @@ class MatchStore {
 
   @action
   async FetchMatch(id): Promise<Match> {
-    let res = await fetch(`${API_HTTPS_URL}/match/${id}`);
+    const res = await fetch(`${API_HTTPS_URL}/match/${id}`);
     if (res.status !== 200) {
       throw new Error(`FetchMatch: non-200: ${res.status}`);
     }
@@ -36,7 +36,7 @@ class MatchStore {
 
   @action
   async FetchLatestMatchOddDetails(matchId): Promise<MarketState[]> {
-    let res = await fetch(`${API_HTTPS_URL}/match/${matchId}/market/latest`);
+    const res = await fetch(`${API_HTTPS_URL}/match/${matchId}/market/latest`);
     if (res.status !== 200) {
       throw new Error(`FetchMatch: non-200: ${res.status}`);
     }

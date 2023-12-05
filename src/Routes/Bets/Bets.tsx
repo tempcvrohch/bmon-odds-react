@@ -8,7 +8,7 @@ import { Bet, BetStatus } from '../../Types/Models.js';
 import { Paper, Toolbar, Typography } from '@mui/material';
 
 const Bets = observer(() => {
-  let { userStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
+  const { userStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
   const [bets, setBets] = useState<Bet[]>([]);
   const toolbarCss = css`
     color: '#fff';
