@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { defineConfig } from 'vite';
 import reactSupport from '@vitejs/plugin-react';
 import { visualizer } from "rollup-plugin-visualizer";

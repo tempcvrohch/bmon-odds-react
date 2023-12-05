@@ -2,8 +2,8 @@ import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
 
 export interface Game {
-	setScore: String;
-	pointMutations: String[];
+	setScore: string;
+	pointMutations: string[];
 }
 
 const GameSummary = observer((props: {game: Game}) => {

@@ -6,7 +6,7 @@ import SportList from './SportList.js';
 import { css } from '@emotion/react';
 
 const Home = observer(() => {
-  let { matchStore } = React.useContext(RootStoreContext) as RootStore;
+  const { matchStore } = React.useContext(RootStoreContext) as RootStore;
 
   useEffect(() => {
     matchStore.FetchRecentMatches();

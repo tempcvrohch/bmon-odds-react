@@ -16,7 +16,7 @@ import { css } from '@emotion/react';
 
 //mostly a copypaste from ../Login, in the real world the register page would look different
 const Register = observer(() => {
-  let { userStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
+  const { userStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
   const [values, setValues] = React.useState({
     username: '',
     password: '',
@@ -42,7 +42,7 @@ const Register = observer(() => {
         toastStore.snackbarSuccess('Registered successfully!');
         setLoading(false);
       })
-      .catch((e) => {
+      .catch(() => {
         // console.log('submitRegistration: catch', e)
         toastStore.snackbarError('Bad input');
         setLoading(false);

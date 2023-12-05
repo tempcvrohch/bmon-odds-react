@@ -4,7 +4,7 @@ import typescriptPlugin from "@typescript-eslint/eslint-plugin";
 
 export default [
     {
-        "files": ["**/*.ts"],
+        "files": ["**/*.ts", "**/*.tsx"],
         "ignores": ["**/node_modules/*"],
         "rules": eslint.configs.recommended.rules
     },

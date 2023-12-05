@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
 import { Paper, Typography } from '@mui/material';
 
-const NoBets = observer((props: { text: String }) => {
+const NoBets = observer((props: { text: string }) => {
   return (
     <div
       css={css`

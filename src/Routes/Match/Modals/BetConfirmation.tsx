@@ -12,8 +12,8 @@ import {
 import { MarketState } from '../../../Types/Models.js';
 
 export interface ModalDetails {
-  open: Boolean;
-  stake: Number;
+  open: boolean;
+  stake: number;
   marketState?: MarketState;
 }
 
