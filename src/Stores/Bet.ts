@@ -9,7 +9,7 @@ class UserStore {
   }
 
   async PlaceBet(newBet) {
-    let res = await fetch(`${API_HTTPS_URL}/bet/place`, {
+    const res = await fetch(`${API_HTTPS_URL}/bet/place`, {
       method: 'POST',
       credentials: 'include',
       headers: {
