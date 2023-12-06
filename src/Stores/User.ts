@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import { API_HTTPS_URL, HEADER_NAME_CSRF } from '../Constants/Constants.js';
+import { API_HTTPS_URL, CSRF_HEADER_NAME, CSRF_COOKIE_NAME } from '../Constants/Constants.js';
 import { RootStore, getCookieValueWithName } from './Store.js';
 import { User } from '../Types/Models.js';
 
@@ -22,7 +22,7 @@ class UserStore {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
+        [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
       },
       body: JSON.stringify(newUser),
     });
@@ -43,7 +43,7 @@ class UserStore {
       credentials: 'include',
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
-        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
+        [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
       },
       //body: new URLSearchParams(formData),
       body: formData,
@@ -65,7 +65,7 @@ class UserStore {
       method: 'GET',
       credentials: 'include',
       headers: {
-        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
+        [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
       },
     });
     if (res.status === 200) {
@@ -81,7 +81,7 @@ class UserStore {
       method: 'GET',
       credentials: 'include',
       headers: {
-        [HEADER_NAME_CSRF]: getCookieValueWithName(HEADER_NAME_CSRF),
+        [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
       },
     });
     if (res.status === 401) {
