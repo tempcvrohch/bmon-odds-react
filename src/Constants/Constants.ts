@@ -6,4 +6,6 @@ export const API_WSS_URL = window.location.host.includes('localhost')
 export const API_HTTPS_URL = window.location.host.includes('localhost')
   ? `http://localhost:${API_PORT}`
   : `https://${window.location.host}:${API_PORT}`;
-export const HEADER_NAME_CSRF = 'X-CSRF-TOKEN';
+
+export const CSRF_HEADER_NAME = 'X-XSRF-TOKEN';
+export const CSRF_COOKIE_NAME = 'XSRF-TOKEN';
