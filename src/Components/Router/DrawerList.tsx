@@ -4,7 +4,7 @@ import { RootStoreContext, RootStore } from '../../Stores/Store.js';
 import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
 import { Badge, Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { Dashboard, PermIdentity } from '@mui/icons-material';
+import { Dashboard, PermIdentity, PersonAdd } from '@mui/icons-material';
 
 const DrawerList = observer(() => {
   const rootStore: RootStore = React.useContext(RootStoreContext);
@@ -52,6 +52,13 @@ const DrawerList = observer(() => {
           </div>
         ) : (
           <div>
+            <Divider />
+            <ListItem sx={{color: 'white'}} component={Link} to="/register">
+              <ListItemIcon>
+                <PersonAdd />
+              </ListItemIcon>
+              <ListItemText>Register</ListItemText>
+            </ListItem>
             <Divider />
             <ListItem sx={{color: 'white'}} component={Link} to="/login">
               <ListItemIcon>
