@@ -2,16 +2,17 @@ import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
 
 export interface Game {
-	setScore: string;
-	pointMutations: string[];
+  id: number;
+  setScore: string;
+  pointMutations: string[];
 }
 
-const GameSummary = observer((props: {game: Game}) => {
+const GameSummary = observer((props: { game: Game }) => {
   return (
     <div>
       <span
         css={css`
-          font-weight: 'bold';
+          font-weight: bold;
         `}
       >
         {props.game.setScore}
@@ -19,10 +20,10 @@ const GameSummary = observer((props: {game: Game}) => {
       <table
         css={css`
           margin: 5px;
-          border-collapse: 'collapse';
-          border-style: 'hidden';
-          '& td': {
-            border: '1px solid black';
+          border-collapse: collapse;
+          border-style: hidden;
+          & tbody & tr & td: {
+            border: 1px solid white;
             padding: 5px;
           },
         `}
@@ -30,12 +31,30 @@ const GameSummary = observer((props: {game: Game}) => {
         <tbody>
           <tr>
             {props.game.pointMutations.map((mut, i) => (
-              <td key={i}>{mut.split('-')[0]}</td>
+              <td
+                css={css`
+                  margin: 5px;
+                  border: 1px solid white;
+                  padding: 5px;
+                `}
+                key={i}
+              >
+                {mut.split('-')[0]}
+              </td>
             ))}
           </tr>
           <tr>
             {props.game.pointMutations.map((mut, i) => (
-              <td key={i}>{mut.split('-')[1]}</td>
+              <td
+                css={css`
+                  margin: 5px;
+                  border: 1px solid white;
+                  padding: 5px;
+                `}
+                key={i}
+              >
+                {mut.split('-')[1]}
+              </td>
             ))}
           </tr>
         </tbody>

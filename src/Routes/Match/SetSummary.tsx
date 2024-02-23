@@ -2,8 +2,8 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import GameSummary, { Game } from './GameSummary.js';
-import { MatchState } from '../../Types/Models.js';
 import { ExpandMore } from '@mui/icons-material';
+import { MatchStateDto } from '../../openapi/models/MatchStateDto.js';
 
 const numberSuffixes = ['st', 'nd', 'rd', 'th', 'th'];
 
@@ -11,9 +11,11 @@ function splitSetMutationsInGames(setMutations) {
   const games: Game[] = [];
   let currentGame: Game;
 
+  let gameId = 0;
   setMutations.forEach((mut) => {
     if (!currentGame) {
       currentGame = {
+        id: gameId++,
         setScore: mut.setScore,
         pointMutations: [mut.pointScore],
       };
@@ -25,6 +27,7 @@ function splitSetMutationsInGames(setMutations) {
     } else {
       games.push(currentGame);
       currentGame = {
+        id: gameId++,
         setScore: mut.setScore,
         pointMutations: [mut.pointScore],
       };
@@ -34,7 +37,7 @@ function splitSetMutationsInGames(setMutations) {
   return games;
 }
 
-const SetSummary = observer((props: { setIndex: number; mutations: MatchState[][] }) => {
+const SetSummary = observer((props: { setIndex: number; mutations: MatchStateDto[][] }) => {
   const [expanded, setExpanded] = React.useState(false);
   const games = splitSetMutationsInGames(props.mutations);
 
@@ -46,6 +49,7 @@ const SetSummary = observer((props: { setIndex: number; mutations: MatchState[][
     <Accordion
       sx={{
         width: 400,
+          background: 'aliceblue'
       }}
       expanded={expanded}
       onChange={onPanelClick}
@@ -56,10 +60,11 @@ const SetSummary = observer((props: { setIndex: number; mutations: MatchState[][
       <AccordionDetails
         sx={{
           display: 'inline-block',
+          background: 'aliceblue'
         }}
       >
         {games.map((game) => (
-          <GameSummary game={game}></GameSummary> //TODO: check if key is needed on game.id
+          <GameSummary key={game.id} game={game}></GameSummary> //TODO: check if key is needed on game.id
         ))}
       </AccordionDetails>
     </Accordion>

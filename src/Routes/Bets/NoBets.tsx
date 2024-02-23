@@ -7,8 +7,8 @@ const NoBets = observer((props: { text: string }) => {
     <div
       css={css`
         margin-top: 50px;
-        display: 'flex';
-        justify-content: 'center';
+        display: flex;
+        justify-content: center;
       `}
     >
       <Paper sx={{ width: 150, textAlign: 'center' }}>

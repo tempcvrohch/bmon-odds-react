@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import { formatDistance, parseISO } from 'date-fns';
-import { Bet } from '../../Types/Models.js';
+import { formatDistance } from 'date-fns';
+import { BetDto } from '../../openapi/models/BetDto.js';
 
 const statusStyles = {
   statusWIN: {
@@ -18,7 +18,7 @@ const statusStyles = {
   },
 };
 
-const BetsList = observer((props: { bets: Bet[] }) => {
+const BetsList = observer((props: { bets: BetDto[] }) => {
   const columns = [
     {
       key: 'created',
@@ -74,12 +74,12 @@ const BetsList = observer((props: { bets: Bet[] }) => {
                   backgroundColor: statusStyles['status' + b.status],
                 }}
               >
-                <TableCell>{formatDistance(parseISO(b.createdAt), new Date())}</TableCell>
+                {b.createdAt && <TableCell>{formatDistance(b.createdAt, new Date())}</TableCell>}
                 <TableCell>{b.marketState.playerName}</TableCell>
                 <TableCell>{b.marketState.odd}</TableCell>
                 <TableCell>{b.marketState.marketName}</TableCell>
                 <TableCell>{b.stake}</TableCell>
-                <TableCell>{b.toReturn.toFixed(2)}</TableCell>
+                <TableCell>{b.toReturn?.toFixed(2)}</TableCell>
               </TableRow>
             );
           })}

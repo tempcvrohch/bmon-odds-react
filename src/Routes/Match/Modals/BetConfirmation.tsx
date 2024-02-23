@@ -9,24 +9,35 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import { MarketState } from '../../../Types/Models.js';
+import { MarketStateDto } from '../../../openapi/models/MarketStateDto.js';
 
 export interface ModalDetails {
   open: boolean;
   stake: number;
-  marketState?: MarketState;
+  marketState?: MarketStateDto;
 }
 
 const BetConfirmation = observer(
-  (props: { modalDetails: ModalDetails; modalOpen: boolean; setModalDetails: React.Dispatch<React.SetStateAction<ModalDetails>>, setModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  (props: {
+    modalDetails: ModalDetails;
+    modalOpen: boolean;
+    setModalDetails: React.Dispatch<React.SetStateAction<ModalDetails>>;
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }) => {
     const { betStore, toastStore, userStore } = React.useContext(RootStoreContext) as RootStore;
     const [loading, setLoading] = useState(false);
 
     const submit = () => {
+      if (!props.modalDetails.marketState) {
+        return;
+      }
       setLoading(true);
 
       betStore
-        .PlaceBet(props.modalDetails)
+        .PlaceBet(props.modalDetails.marketState.id, {
+          stake: props.modalDetails.stake,
+          marketStateId: props.modalDetails.marketState.id,
+        })
         .then(() => {
           toastStore.snackbarSuccess(`Bet placed successfully!`);
           if (userStore.user) {
@@ -36,9 +47,7 @@ const BetConfirmation = observer(
           closeModal();
         })
         .catch((e) => {
-          if (!e.message.includes('401')) {
-            toastStore.snackbarError(`Failed to place bet.`);
-          }
+          toastStore.snackbarError(`Failed to place bet.`);
 
           console.error(e);
           closeModal();
@@ -50,17 +59,17 @@ const BetConfirmation = observer(
       props.setModalOpen(false);
     };
 
-		if(!props.modalDetails.marketState){
-			return <><span>MarketState unavailable</span></>
-		}
-
     return (
       <Dialog onClose={closeModal} open={props.modalOpen} maxWidth={'xl'}>
-        <DialogTitle id="">Confirm Wager({props.modalDetails.marketState.marketName})</DialogTitle>
+        {/* TODO: add market name to dto */}
+        <DialogTitle id="">Confirm Wager(Fulltime Result)</DialogTitle>
         <DialogContent>
           You are about to place <strong>€{props.modalDetails.stake.toString()}</strong> on{' '}
           <strong>
-            {props.modalDetails.marketState.playerName} @ {props.modalDetails.marketState.odd}
+            {props.modalDetails.marketState?.player.firstname +
+              ' ' +
+              props.modalDetails.marketState?.player.lastname}{' '}
+            @ {props.modalDetails.marketState?.odd}
           </strong>
         </DialogContent>
         <DialogActions>

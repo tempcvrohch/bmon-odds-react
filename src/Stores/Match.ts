@@ -1,47 +1,42 @@
-import { observable, action } from 'mobx';
-import { API_HTTPS_URL } from '../Constants/Constants.js';
+import { action, runInAction, makeAutoObservable } from 'mobx';
+import { API_HTTPS_URL, OPEN_API_CONF } from '../Constants/Constants.js';
 import { RootStore } from './Store.js';
-import { MarketState, Match } from '../Types/Models.js';
+import { MatchesApi } from '../openapi/apis/MatchesApi.js';
+import { MatchDto } from '../openapi/models/MatchDto.js';
 
 class MatchStore {
   rootStore: RootStore;
-  @observable matches: Match[];
-  @observable recentMatches: Match[];
+  matches: MatchDto[];
+  recentMatches: MatchDto[];
+  matchesApi: MatchesApi;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.matches = [];
     this.recentMatches = [];
+    this.matchesApi = new MatchesApi();
+		// @ts-expect-error Configuration ctor must be set to public in openapi/runtime.ts
+    this.matchesApi.configuration = OPEN_API_CONF;
+
+		makeAutoObservable(this);
+  }
+
+  async FetchRecentMatches(): Promise<MatchDto[]> {
+    const recentMatches = await this.matchesApi.getRecentMatches();
+    runInAction(() => {
+      this.recentMatches = recentMatches;
+    });
+    return recentMatches;
   }
 
   @action
-  async FetchRecentMatches(): Promise<Match[]> {
-    const res = await fetch(`${API_HTTPS_URL}/matches/recent`, {}); //credentials: 'include'?
-    if (res.status !== 200) {
-      throw new Error(`FetchRecentMatches: non-200: ${res.status}`);
-    }
-
-    return await res.json() as Match[]
-  }
-
-  @action
-  async FetchMatch(id): Promise<Match> {
+  async FetchMatch(id): Promise<MatchDto> {
     const res = await fetch(`${API_HTTPS_URL}/match/${id}`);
     if (res.status !== 200) {
       throw new Error(`FetchMatch: non-200: ${res.status}`);
     }
 
-    return await res.json() as Match;
-  }
-
-  @action
-  async FetchLatestMatchOddDetails(matchId): Promise<MarketState[]> {
-    const res = await fetch(`${API_HTTPS_URL}/match/${matchId}/market/latest`);
-    if (res.status !== 200) {
-      throw new Error(`FetchMatch: non-200: ${res.status}`);
-    }
-
-    return await res.json() as MarketState[];
+    return (await res.json()) as MatchDto;
   }
 }
 

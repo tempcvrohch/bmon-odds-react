@@ -23,10 +23,9 @@ const Login = observer(() => {
     setLoading(true);
 
     userStore
-      .Login(values)
+      .Login(values.username, values.password)
       .then(async () => {
         toastStore.snackbarSuccess('Logged in successfully!');
-        await userStore.GetCurrentUserSession();
         setLoading(false);
       })
       .catch((e) => {
@@ -42,17 +41,23 @@ const Login = observer(() => {
         <hgroup
           css={css`
             margin-top: 50px;
-            text-align: 'center';
+            text-align: center;
             padding: 30px;
-            background: '#2C4770';
-            color: '#fff';
+            background: #2c4770;
+            color: #fff;
           `}
-        ></hgroup>
+        >
+
+          <Typography variant="h5" color="inherit">
+            Login
+          </Typography>
+				</hgroup>
         <Paper
           sx={{
             height: 500,
             width: 420,
             backgroundColor: '#202020;',
+            background: 'aliceblue',
           }}
         >
           {userStore.loggedIn ? (
@@ -61,9 +66,6 @@ const Login = observer(() => {
             <Grid container justifyContent="center">
               <Grid item>
                 <Grid item>
-                  <Typography variant="h5" color="inherit">
-                    Login
-                  </Typography>
                   <TextField
                     required
                     css={css`
@@ -90,8 +92,8 @@ const Login = observer(() => {
                 <Grid item>
                   <div
                     css={css`
-                      display: 'flex';
-                      justify-content: 'center';
+                      display: flex;
+                      justify-content: center;
                       margin-top: 50px;
                     `}
                   >
@@ -107,9 +109,9 @@ const Login = observer(() => {
                         <CircularProgress
                           size={24}
                           css={css`
-                            position: 'absolute';
-                            top: '50%';
-                            left: '50%';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
                             margin-top: -12px;
                             margin-left: -12px;
                           `}
@@ -125,11 +127,11 @@ const Login = observer(() => {
         <div
           css={css`
             height: 30px;
-            color: '#fff';
+            color: #fff;
             padding: 5px;
             opacity: 0.7;
-            text-align: 'center';
-            background: '#2C4770';
+            text-align: center;
+            background: #2c4770;
           `}
         >
           <span>Bmon Odds v{VERSION}</span>

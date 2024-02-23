@@ -14,6 +14,7 @@
 /dist
 
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local
@@ -28,3 +29,6 @@ temp
 
 # bundler
 stats.html
+
+# generated
+/public/img/avatars/*.jpg

@@ -10,9 +10,9 @@ const DrawerList = observer(() => {
   const rootStore: RootStore = React.useContext(RootStoreContext);
 
   const isBadgeInvisible = () =>
-    !rootStore.userStore.user || rootStore.userStore.user.pendingBetsAmount === 0;
+    !rootStore.userStore.user || rootStore.userStore.pendingBetsAmount === 0;
   const badgeContent = () =>
-    rootStore.userStore.user ? rootStore.userStore.user.pendingBetsAmount : 0;
+    rootStore.userStore.user ? rootStore.userStore.pendingBetsAmount : 0;
 
   return (
     <nav css={css`
@@ -33,7 +33,7 @@ const DrawerList = observer(() => {
             <ListItem sx={{color: 'white'}} component={Link} to="/bets">
               <ListItemIcon>
                 <Badge
-                  sx={{ margin: 20 }}
+                  sx={{ margin: 2 }}
                   invisible={isBadgeInvisible()}
                   badgeContent={badgeContent()}
                   color="secondary"

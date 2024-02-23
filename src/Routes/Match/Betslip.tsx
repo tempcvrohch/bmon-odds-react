@@ -11,12 +11,11 @@ import {
   InputAdornment,
 } from '@mui/material';
 import BetConfirmation, { ModalDetails } from './Modals/BetConfirmation.js';
-import { MarketState, Match } from '../../Types/Models.js';
 import { css } from '@emotion/react';
+import { MatchDto } from '../../openapi/models/MatchDto.js';
 
-const Betslip = observer((props: { match: Match }) => {
-  const { matchStore } = React.useContext(RootStoreContext) as RootStore;
-  const [oddDetails, setOddDetails] = useState<MarketState[]>();
+const Betslip = observer((props: { match: MatchDto }) => {
+  const { betStore } = React.useContext(RootStoreContext) as RootStore;
   const [stakeAmount, setStakeAmount] = useState(0);
   const [selectedBetIndex, setSelectedBetIndex] = useState(0);
   const [betPlaceButtonEnabled, setBetPlaceButtonEnabled] = useState(false);
@@ -27,9 +26,7 @@ const Betslip = observer((props: { match: Match }) => {
   });
 
   useEffect(() => {
-    matchStore.FetchLatestMatchOddDetails(props.match.id).then((latestOddDetails) => {
-      setOddDetails(latestOddDetails);
-    });
+    betStore.FetchLatestMarketStates(props.match.id);
   }, []);
 
   useEffect(() => {
@@ -37,7 +34,7 @@ const Betslip = observer((props: { match: Match }) => {
   });
 
   const continueToModal = () => {
-    if (!oddDetails) {
+    if (!betStore.currentMarketStates) {
       return;
     }
 
@@ -45,14 +42,15 @@ const Betslip = observer((props: { match: Match }) => {
     setModalDetails({
       open: true,
       stake: stakeAmount,
-      marketState: oddDetails[selectedBetIndex],
+      marketState: betStore.currentMarketStates[selectedBetIndex],
     });
   };
 
   return (
     <Paper
       css={css`
-        margin-top: 50px;
+        margin-top: 51px;
+        background-color: aliceblue;
       `}
     >
       <BetConfirmation
@@ -69,18 +67,20 @@ const Betslip = observer((props: { match: Match }) => {
       >
         Betslip
       </Toolbar>
-      {oddDetails ? (
+      {betStore.currentMarketStates ? (
         <div>
           <div
             css={css`
-              display: 'flex',
-              justify-content: 'center',
+              display: flex;
+              justify-content: center;
+              margin-top: 20px;
+              margin-bottom: 20px;
             `}
           >
-            {oddDetails.map((oddDetail, i) => (
+            {betStore.currentMarketStates.map((oddDetail, i) => (
               <Button
-                // key={oddDetail.betId} TODO: figure out what
-                disabled={oddDetail.odd === '999/1'}
+                key={oddDetail.id}
+                disabled={oddDetail.suspended}
                 css={css`
                   margin: 20px,
                   padding: 15px,
@@ -96,9 +96,10 @@ const Betslip = observer((props: { match: Match }) => {
           </div>
           <div
             css={css`
-              display: 'flex',
-              justify-content: 'space-evenly',
-              padding: 8px,
+              display: flex;
+              justify-content: space-evenly;
+              padding: 8px;
+              margin-bottom: 10px;
             `}
           >
             <FormControl

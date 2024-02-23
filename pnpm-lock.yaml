@@ -29,6 +29,9 @@ dependencies:
   date-fns:
     specifier: ^2.30.0
     version: 2.30.0
+  dotenv:
+    specifier: ^16.4.5
+    version: 16.4.5
   mobx:
     specifier: ^6.12.0
     version: 6.12.0
@@ -47,6 +50,9 @@ dependencies:
   typeface-roboto:
     specifier: ^1.1.13
     version: 1.1.13
+  whatwg-fetch:
+    specifier: ^3.6.20
+    version: 3.6.20
 
 devDependencies:
   '@babel/plugin-proposal-decorators':
@@ -1691,6 +1697,11 @@ packages:
       csstype: 3.1.2
     dev: false
 
+  /dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
+    dev: false
+
   /electron-to-chromium@1.4.597:
     resolution: {integrity: sha512-0XOQNqHhg2YgRVRUrS4M4vWjFCFIP2ETXcXe/0KIQBjXE9Cpy+tgzzYfuq6HGai3hWq0YywtG+5XK8fyG08EjA==}
     dev: true
@@ -3265,6 +3276,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /whatwg-fetch@3.6.20:
+    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
+    dev: false
 
   /which-boxed-primitive@1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

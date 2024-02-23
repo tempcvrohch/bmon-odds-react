@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { Card, CardHeader, CardContent, Typography, Avatar } from '@mui/material';
-import { formatDistance, parseISO } from 'date-fns';
+import { formatDistance } from 'date-fns';
 import { css } from '@emotion/react';
-import { Match } from '../../Types/Models.js';
-
+import { MatchDto } from '../../openapi/models/MatchDto.js';
 const setScoreIndicatorStyle = css`
   font-size: 100px;
   margin: 10px;
@@ -43,8 +42,8 @@ function parseIndividualSetScores(sets) {
   return playerSetScores;
 }
 
-const MatchSummary = observer((props: { match: Match }) => {
-  const foundLeague = findLeagueIdentifier(props.match.leagueName.toLowerCase());
+const MatchSummary = observer((props: { match: MatchDto }) => {
+  const foundLeague = findLeagueIdentifier(props.match.league.name.toLowerCase());
   const sets = parseSets(props.match.matchState.setScore);
   const playerScores = parseIndividualSetScores(sets);
 
@@ -52,28 +51,36 @@ const MatchSummary = observer((props: { match: Match }) => {
     <Card
       sx={{
         width: 400,
-        height: 350,
+        height: 420,
+        backgroundColor: 'aliceblue',
       }}
     >
       <CardHeader
         avatar={<Avatar alt={''} src={`/img/league_logos/${foundLeague}.png`} />}
         title={props.match.name}
-        subheader={props.match.leagueName}
+        subheader={props.match.league.name}
+        sx={{ background: '#3d3d3d' }}
       />
       {/*TODO: fix child css */}
       <div
         css={css`
-          width: 400px,
-          height: 120px,
-          text-align: 'center',
+          width: 400px;
+          text-align: center
         `}
       >
+        <img src={`/img/avatars/${props.match.matchState.marketStates[0].id % 20}.jpg`} />
         <span css={setScoreIndicatorStyle}>{playerScores[0]}</span>
         <span css={setScoreIndicatorStyle}>:</span>
         <span css={setScoreIndicatorStyle}>{playerScores[1]}</span>
+        <img src={`/img/avatars/${props.match.matchState.marketStates[1].id % 20}.jpg`} />
       </div>
-      <CardContent>
-        <span>Started: {formatDistance(parseISO(props.match.createdAt), new Date())} </span>
+      <CardContent
+				sx={{
+					marginBottom: 50
+				}}>
+        <span>
+          Started: {props.match.createdAt && formatDistance(props.match.createdAt, new Date())}{' '}
+        </span>
         <ul>
           {sets.map(
             (set) => (

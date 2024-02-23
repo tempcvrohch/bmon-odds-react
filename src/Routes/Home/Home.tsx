@@ -12,19 +12,21 @@ const Home = observer(() => {
     matchStore.FetchRecentMatches();
   }, []);
 
+	// console.log('test');
+
   return (
     <div>
       <div
         css={css`
           margin-top: 50px;
-          display: 'flex';
-          justify-content: 'center';
+          display: flex;
+          justify-content: center;
         `}
       >
         <div>
           <SportList></SportList>
           <SimpleMatchTable
-            matches={matchStore.recentMatches.filter((m) => m.live)}
+            matches={matchStore.recentMatches}
           ></SimpleMatchTable>
         </div>
       </div>

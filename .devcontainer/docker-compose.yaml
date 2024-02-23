@@ -1,0 +1,31 @@
+version: "3"
+services:
+  bmon-react:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        VARIANT: 20
+    volumes:
+      # Mounts the project folder to '/workspace'. While this file is in .devcontainer,
+      # mounts are relative to the first file in the list, which is a level up.
+      - .:/workspace
+      - type: tmpfs
+        target: /tmp
+      - "bmon-react-workspace-pnpm-store:/workspace/.pnpm-store"
+      - "bmon-react-workspace-node_modules:/workspace/node_modules"
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    networks:
+      - main
+
+volumes:
+  "bmon-react-workspace-pnpm-store":
+  "bmon-react-workspace-node_modules":
+
+networks:
+  main:
+    external:
+      name: bmon-odds-server_main

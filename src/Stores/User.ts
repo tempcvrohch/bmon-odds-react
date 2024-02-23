@@ -1,81 +1,65 @@
-import { observable, action } from 'mobx';
-import { API_HTTPS_URL, CSRF_HEADER_NAME, CSRF_COOKIE_NAME } from '../Constants/Constants.js';
+import { makeAutoObservable, runInAction } from 'mobx';
+import {
+  API_HTTPS_URL,
+  CSRF_HEADER_NAME,
+  CSRF_COOKIE_NAME,
+  OPEN_API_CONF,
+} from '../Constants/Constants.js';
 import { RootStore, getCookieValueWithName } from './Store.js';
-import { User } from '../Types/Models.js';
+import { UserApi } from '../openapi/apis/UserApi.js';
+import { UserDto } from '../openapi/models/UserDto.js';
 
 class UserStore {
   rootStore: RootStore;
-  @observable user: User | null;
-  @observable loggedIn: boolean;
+  user: UserDto | null;
+  loggedIn: boolean;
+  userApi: UserApi;
+	pendingBetsAmount: number;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.user = null;
     this.loggedIn = false;
+    this.userApi = new UserApi();
+		this.pendingBetsAmount = 0;
+    // @ts-expect-error Configuration ctor must be set to public in openapi/runtime.ts
+    this.userApi.configuration = OPEN_API_CONF;
 
+    makeAutoObservable(this);
     this.GetCurrentUserSession();
   }
 
-  @action
   async Register(newUser) {
-    const res = await fetch(`${API_HTTPS_URL}/auth/register`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
-      },
-      body: JSON.stringify(newUser),
-    });
-    if (res.status !== 200) {
-      throw new Error(`Register: non-200: ${res.status}`);
-    }
+    return this.userApi
+      .register({
+        xXSRFTOKEN: getCookieValueWithName(CSRF_COOKIE_NAME),
+        userRegisterDto: newUser,
+      })
+      .then((registeredUser) => {
+        runInAction(() => {
+          this.user = registeredUser;
+          this.loggedIn = true;
+        });
+      });
   }
 
-  @action
-  async Login(loginUser) {
-    const formData = new FormData();
-    formData.append('username', loginUser.username);
-    formData.append('password', loginUser.password);
-
-    console.log(`${API_HTTPS_URL}/auth/login`);
-    const res = await fetch(`${API_HTTPS_URL}/auth/login`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
-      },
-      //body: new URLSearchParams(formData),
-      body: formData,
-    });
-    if (res.status !== 200) {
-      throw new Error(`Login: non-200: ${res.status}`);
-    }
-
-    this.loggedIn = true;
+  async Login(username: string, password: string) {
+    return this.userApi.loginRaw({ username: username, password: password });
   }
 
-  @action
   logout() {
     this.loggedIn = false;
   }
 
   async GetCurrentUserSession() {
-    const res = await fetch(`${API_HTTPS_URL}/auth/session`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
-      },
+    return this.userApi.getUserSessionRaw().then((registeredUser) => {
+      runInAction(() => {
+        this.user = registeredUser;
+        this.loggedIn = true;
+      });
     });
-    if (res.status === 200) {
-      this.loggedIn = true;
-      this.user = await res.json();
-      console.log(this.user);
-    }
   }
 
-  @action
   async GetCurrentUserBets() {
     const res = await fetch(`${API_HTTPS_URL}/bets/pending`, {
       method: 'GET',

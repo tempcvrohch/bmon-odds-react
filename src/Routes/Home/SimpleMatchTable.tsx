@@ -2,9 +2,12 @@ import { observer } from 'mobx-react-lite';
 
 import { IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { Search } from '@mui/icons-material';
-import { Match } from '../../Types/Models.js';
+import { MatchDto } from '../../openapi/models/MatchDto.js';
+import { useNavigate } from 'react-router-dom';
 
-const SimpleMatchTable = observer((props: { matches: Match[] }) => {
+const SimpleMatchTable = observer((props: { matches: MatchDto[] }) => {
+	const navigate = useNavigate();
+
   const columns = [
     {
       key: 'name',
@@ -43,13 +46,12 @@ const SimpleMatchTable = observer((props: { matches: Match[] }) => {
         </TableHead>
         <TableBody>
           {props.matches
-            .sort((a, b) => a.leagueName.localeCompare(b.leagueName))
             .map((n) => {
               return (
                 <TableRow
                   hover
                   tabIndex={-1}
-                  key={n.bId}
+                  key={n.id}
                   sx={{
                     height: 40,
                     '& td': {
@@ -58,13 +60,12 @@ const SimpleMatchTable = observer((props: { matches: Match[] }) => {
                   }}
                 >
                   <TableCell>{n.name}</TableCell>
-                  <TableCell>{n.leagueName}</TableCell>
+                  <TableCell>{n.league.name}</TableCell>
                   <TableCell>{n.matchState.setScore}</TableCell>
                   <TableCell>
                     <IconButton
                       aria-label="details"
-                      // onClick={() => router.history.push('/match/' + n.id)}
-                      onClick={() => console.log('TODO: implement me')}
+                      onClick={() => navigate('/match/' + n.id)}
                     >
                       <Search />
                     </IconButton>

@@ -1,14 +1,21 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  "dockerComposeFile": ["../docker-compose.yaml", "docker-compose.yaml"],
+  "service": "bmon-react",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+	"customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "humao.rest-client",
+        "esbenp.prettier-vscode"
+      ]
+    }
   },
-  "mounts": [
-    "source=global-pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume",
-		"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
-  ],
   "postCreateCommand": {
-		"chown .pnpm-store" : "sudo chown node .pnpm-store", 
-		"chown node_modules": "sudo chown node node_modules"
+		"chown .pnpm-store" : "sudo chown node /workspace/.pnpm-store", 
+		"chown node_modules": "sudo chown node /workspace/node_modules"
 	}
 }

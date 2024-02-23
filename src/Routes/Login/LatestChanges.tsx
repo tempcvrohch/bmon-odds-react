@@ -13,6 +13,15 @@ const LatestChanges = observer(() => {
         <Typography variant="h4" color="inherit">
           Latest Changes
         </Typography>
+        <Typography color="inherit">22/02/2024</Typography>
+        <ul>
+          <li>
+            <Typography color="inherit">Project resurrected for another CV</Typography>
+          </li>
+          <li>
+            <Typography color="inherit">TODO: fill this in</Typography>
+          </li>
+        </ul>
         <Typography color="inherit">14/05/2019</Typography>
         <ul>
           <li>

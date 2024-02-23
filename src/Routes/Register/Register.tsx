@@ -42,8 +42,8 @@ const Register = observer(() => {
         toastStore.snackbarSuccess('Registered successfully!');
         setLoading(false);
       })
-      .catch(() => {
-        // console.log('submitRegistration: catch', e)
+      .catch((e) => {
+				console.error(e);
         toastStore.snackbarError('Bad input');
         setLoading(false);
       });
@@ -55,10 +55,10 @@ const Register = observer(() => {
         <hgroup
           css={css`
             margin-top: 50px;
-            text-align: 'center';
+            text-align: center;
             padding: 30px;
-            background: '#2C4770';
-            color: '#fff';
+            background: #2c4770;
+            color: #fff;
           `}
         >
           <Typography variant="h5" color="inherit">
@@ -69,6 +69,7 @@ const Register = observer(() => {
           sx={{
             height: 500,
             width: 420,
+            background: 'aliceblue',
           }}
         >
           <Grid container justifyContent="center">
@@ -111,8 +112,8 @@ const Register = observer(() => {
               <Grid item>
                 <div
                   css={css`
-                    display: 'flex';
-                    justify-content: 'center';
+                    display: flex;
+                    justify-content: center;
                     margin-top: 50px;
                   `}
                 >
@@ -145,11 +146,11 @@ const Register = observer(() => {
         <div
           css={css`
             height: 30px;
-            color: '#fff';
+            color: #fff;
             padding: 5px;
             opacity: 0.7;
-            text-align: 'center';
-            background: '#2C4770';
+            text-align: center;
+            background: #2c4770;
           `}
         >
           <span>Bmon Odds v{VERSION}</span>

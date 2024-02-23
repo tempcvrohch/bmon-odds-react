@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { action, makeAutoObservable, runInAction } from 'mobx';
 import { RootStore } from './Store.js';
 import { AlertColor } from '@mui/material';
 
@@ -10,7 +10,7 @@ interface Toast {
 
 class ToastStore {
   rootStore: RootStore;
-  @observable toast: Toast;
+  toast: Toast;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -19,12 +19,16 @@ class ToastStore {
       message: '',
       variant: 'success',
     };
+
+    makeAutoObservable(this);
   }
 
   @action
   showWithMessage(message) {
-    this.toast.message = message;
-    this.toast.open = true;
+    runInAction(() => {
+      this.toast.message = message;
+      this.toast.open = true;
+    });
     setTimeout(() => (this.toast.open = false), 2000);
   }
 

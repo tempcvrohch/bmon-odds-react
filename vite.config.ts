@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import reactSupport from '@vitejs/plugin-react';
-import { visualizer } from "rollup-plugin-visualizer";
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,6 +9,8 @@ export default defineConfig({
     hmr: true,
     watch: {
       usePolling: true,
+      interval: 1000,
+      binaryInterval: 510000,
     },
   },
   plugins: [
@@ -19,6 +21,6 @@ export default defineConfig({
         },
       },
     }),
-		visualizer(),
+    visualizer(),
   ],
 });
