@@ -10,19 +10,23 @@ const DrawerList = observer(() => {
   const rootStore: RootStore = React.useContext(RootStoreContext);
 
   const isBadgeInvisible = () =>
-    !rootStore.userStore.user || rootStore.userStore.pendingBetsAmount === 0;
+    !rootStore.userStore.user || rootStore.userStore.bets.filter(b => b.status === 'PENDING').length === 0;
   const badgeContent = () =>
-    rootStore.userStore.user ? rootStore.userStore.pendingBetsAmount : 0;
+    rootStore.userStore.user ? rootStore.userStore.bets.filter(b => b.status === 'PENDING').length : 0;
 
   return (
-    <nav css={css`
-			width: 180px;
+    <nav
+      css={css`
+        width: 180px;
+        background-color: #2f2f2f;
 
-			@media (max-width: 768px){
-				width: 50px;
-			}`}>
+        @media (max-width: 768px) {
+          width: 50px;
+        }
+      `}
+    >
       <List>
-        <ListItem sx={{color: 'white'}} component={Link} to="/">
+        <ListItem sx={{ color: 'white' }} component={Link} to="/">
           <ListItemIcon>
             <Dashboard />
           </ListItemIcon>
@@ -30,15 +34,14 @@ const DrawerList = observer(() => {
         </ListItem>
         {rootStore.userStore.loggedIn ? (
           <div>
-            <ListItem sx={{color: 'white'}} component={Link} to="/bets">
+            <ListItem sx={{ color: 'white' }} component={Link} to="/bets">
               <ListItemIcon>
                 <Badge
                   sx={{ margin: 2 }}
                   invisible={isBadgeInvisible()}
                   badgeContent={badgeContent()}
                   color="secondary"
-                >
-                </Badge>
+                ></Badge>
               </ListItemIcon>
               <ListItemText>Bets</ListItemText>
             </ListItem>
@@ -53,14 +56,14 @@ const DrawerList = observer(() => {
         ) : (
           <div>
             <Divider />
-            <ListItem sx={{color: 'white'}} component={Link} to="/register">
+            <ListItem sx={{ color: 'white' }} component={Link} to="/register">
               <ListItemIcon>
                 <PersonAdd />
               </ListItemIcon>
               <ListItemText>Register</ListItemText>
             </ListItem>
             <Divider />
-            <ListItem sx={{color: 'white'}} component={Link} to="/login">
+            <ListItem sx={{ color: 'white' }} component={Link} to="/login">
               <ListItemIcon>
                 <PermIdentity />
               </ListItemIcon>

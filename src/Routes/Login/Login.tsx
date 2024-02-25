@@ -57,7 +57,7 @@ const Login = observer(() => {
             height: 500,
             width: 420,
             backgroundColor: '#202020;',
-            background: 'aliceblue',
+            background: '#2f2f2f',
           }}
         >
           {userStore.loggedIn ? (

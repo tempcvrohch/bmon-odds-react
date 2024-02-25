@@ -69,7 +69,7 @@ const Register = observer(() => {
           sx={{
             height: 500,
             width: 420,
-            background: 'aliceblue',
+            background: '#2f2f2f',
           }}
         >
           <Grid container justifyContent="center">

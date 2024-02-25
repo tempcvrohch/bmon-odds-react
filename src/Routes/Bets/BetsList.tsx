@@ -1,25 +1,29 @@
 import { observer } from 'mobx-react-lite';
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { formatDistance } from 'date-fns';
 import { BetDto } from '../../openapi/models/BetDto.js';
+import { Search } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const statusStyles = {
   statusWIN: {
     backgroundColor: '#f3fcf1',
   },
-  statusLOSE: {
-    backgroundColor: '#fcf3f1',
+  statusLOSS: {
+    backgroundColor: '#412323',
   },
   statusPENDING: {
     backgroundColor: '#f1f3fc',
   },
   statusVOID: {
-    backgroundColor: '#fcf1fb',
+    backgroundColor: '#4b4b4b',
   },
 };
 
 const BetsList = observer((props: { bets: BetDto[] }) => {
-  const columns = [
+	const navigate = useNavigate();
+  
+	const columns = [
     {
       key: 'created',
       label: 'Created',
@@ -44,10 +48,14 @@ const BetsList = observer((props: { bets: BetDto[] }) => {
       key: 'toReturn',
       label: 'To Return',
     },
+		{
+			key: 'lookupMatch',
+			label: 'Match'
+		}
   ];
 
   return (
-    <Paper sx={{ maxWidth: 800 }}>
+    <Paper sx={{ maxWidth: 800, backgroundColor: '#2f2f2f' }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -75,11 +83,18 @@ const BetsList = observer((props: { bets: BetDto[] }) => {
                 }}
               >
                 {b.createdAt && <TableCell>{formatDistance(b.createdAt, new Date())}</TableCell>}
-                <TableCell>{b.marketState.playerName}</TableCell>
+                <TableCell>
+                  {b.marketState.player.firstname} {b.marketState.player.lastname}
+                </TableCell>
                 <TableCell>{b.marketState.odd}</TableCell>
-                <TableCell>{b.marketState.marketName}</TableCell>
+                <TableCell>{b.marketState.market.name}</TableCell>
                 <TableCell>{b.stake}</TableCell>
                 <TableCell>{b.toReturn?.toFixed(2)}</TableCell>
+                <TableCell>
+                  <IconButton aria-label="details" onClick={() => navigate('/match/' + b.id)}>
+                    <Search />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             );
           })}

@@ -12,8 +12,6 @@ const Home = observer(() => {
     matchStore.FetchRecentMatches();
   }, []);
 
-	// console.log('test');
-
   return (
     <div>
       <div

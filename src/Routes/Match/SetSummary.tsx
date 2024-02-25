@@ -49,7 +49,7 @@ const SetSummary = observer((props: { setIndex: number; mutations: MatchStateDto
     <Accordion
       sx={{
         width: 400,
-          background: 'aliceblue'
+          background: '#2f2f2f'
       }}
       expanded={expanded}
       onChange={onPanelClick}
@@ -60,7 +60,7 @@ const SetSummary = observer((props: { setIndex: number; mutations: MatchStateDto
       <AccordionDetails
         sx={{
           display: 'inline-block',
-          background: 'aliceblue'
+          background: '#2f2f2f'
         }}
       >
         {games.map((game) => (

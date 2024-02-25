@@ -1,8 +1,11 @@
-.root{
-    display: flex;
+body {
+  background-color: #232323 !important;
 }
 
-.main{
-    width: 100%
+.root {
+  display: flex;
 }
 
+.main {
+  width: 100%;
+}

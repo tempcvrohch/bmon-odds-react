@@ -6,11 +6,12 @@ import { visualizer } from 'rollup-plugin-visualizer';
 export default defineConfig({
   server: {
     port: 3000,
-    hmr: true,
+		host: true,
+    hmr: {
+			clientPort: 443
+		},
     watch: {
-      usePolling: true,
-      interval: 1000,
-      binaryInterval: 510000,
+      useFsEvents: true,
     },
   },
   plugins: [

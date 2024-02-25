@@ -50,7 +50,7 @@ const Betslip = observer((props: { match: MatchDto }) => {
     <Paper
       css={css`
         margin-top: 51px;
-        background-color: aliceblue;
+        background-color: #2f2f2f;
       `}
     >
       <BetConfirmation

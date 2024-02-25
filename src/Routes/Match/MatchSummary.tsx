@@ -52,7 +52,7 @@ const MatchSummary = observer((props: { match: MatchDto }) => {
       sx={{
         width: 400,
         height: 420,
-        backgroundColor: 'aliceblue',
+        backgroundColor: '#2f2f2f',
       }}
     >
       <CardHeader

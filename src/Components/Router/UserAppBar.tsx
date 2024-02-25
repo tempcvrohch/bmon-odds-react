@@ -7,7 +7,7 @@ const UserAppBar = observer(() => {
     const { userStore } = React.useContext(RootStoreContext) as RootStore;
 
     return (
-        <AppBar position="static" className="appbar" sx={{gridArea: 'appbar'}}>
+        <AppBar position="static" className="appbar" sx={{gridArea: 'appbar', backgroundColor: '#2f2f2f'}}>
             <Toolbar sx={{justifyContent: 'flex-end'}}>
                 {userStore.user ?
                     <div>

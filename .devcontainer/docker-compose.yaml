@@ -20,6 +20,8 @@ services:
     command: /bin/sh -c "while sleep 1000; do :; done"
     networks:
       - main
+    ports:
+      - "3000:3000"
 
 volumes:
   "bmon-react-workspace-pnpm-store":
