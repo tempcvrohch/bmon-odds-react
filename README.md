@@ -1,21 +1,31 @@
-# Front end in React.js for bmon-odds-scraper
+# Front end in React.js for bmon-odds-react
 
-Checkout and run ````npm start````
+This project has the following dependencies:
+
+- bmon-odds-server(**java spring boot**)
+- bmon-odds-gen(**c# asp.net core**)
+
+All three projects have ````.devcontainer```` setups, can also be run manually with ````docker-compose````.
+
+To generate new endpoints:
+- bmon-odds-openapi(**openapi-yaml**)
+
+Checkout and run ````npm run dev````
 
 Screenshots of a running version:
 
 ## Main Page:
 
-![main page](https://lh6.googleusercontent.com/FEijpyzyvLYKwcRCbCN7eaiCPa5oUDGeg2fx7tLZWPvA0UVMfHZxYmGYtGrtmDa23XsAq8vpbSZBSW2UA4cx=w1526-h881-rw)
+![Main](/README/img/readme2.jpg)
 
 ## Match Page:
 
-![match_page](https://lh6.googleusercontent.com/7hsoUOGbI-jazp7YjsRjo9_33s49_-Pjz0EVAEUNp4h3HospS4JlV7VY9XXb3m-hndQywqAjT2mAStDRT7lC=w1526-h881-rw)
+![Matches](/README/img/readme1.jpg)
 
 ## Place Wager:
 
-![place_wager](https://lh4.googleusercontent.com/qt8KQYHLEXwZISYqgW53SLK1s2RHBlnST5WRs-AxxHD3MET4EccjN72lhjjmWw3uvAPN2iqHY2wjVG4PFcxm=w1526-h881)
+![Wager](/README/img/readme3.jpg)
 
 ## Placed bets:
 
-![placed bets](https://lh5.googleusercontent.com/KohVFYSHm3mARGy2k_rRG4rNNkwrSsyV5bJgEGWniQxVkXtxTSopgATZutGMvYZS8056Q0GPsPGYq0ukZEzv=w1526-h881-rw)
+![Placed](/README/img/readme4.jpg)
