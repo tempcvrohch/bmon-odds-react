@@ -13,20 +13,19 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   MatchDto,
   MatchUpsertDto,
-} from '../models/index';
+} from '../models/index.js';
 import {
     MatchDtoFromJSON,
     MatchDtoToJSON,
     MatchUpsertDtoFromJSON,
     MatchUpsertDtoToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 export interface CreateMatchRequest {
-    xXSRFTOKEN: string;
     matchUpsertDto: MatchUpsertDto;
 }
 
@@ -35,7 +34,6 @@ export interface GetMatchByIdRequest {
 }
 
 export interface UpdateMatchAndStatesRequest {
-    xXSRFTOKEN: string;
     id: number;
     matchUpsertDto: MatchUpsertDto;
 }
@@ -49,10 +47,6 @@ export class MatchApi extends runtime.BaseAPI {
      * Create a new match
      */
     async createMatchRaw(requestParameters: CreateMatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MatchDto>> {
-        if (requestParameters.xXSRFTOKEN === null || requestParameters.xXSRFTOKEN === undefined) {
-            throw new runtime.RequiredError('xXSRFTOKEN','Required parameter requestParameters.xXSRFTOKEN was null or undefined when calling createMatch.');
-        }
-
         if (requestParameters.matchUpsertDto === null || requestParameters.matchUpsertDto === undefined) {
             throw new runtime.RequiredError('matchUpsertDto','Required parameter requestParameters.matchUpsertDto was null or undefined when calling createMatch.');
         }
@@ -62,10 +56,6 @@ export class MatchApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.xXSRFTOKEN !== undefined && requestParameters.xXSRFTOKEN !== null) {
-            headerParameters['X-XSRF-TOKEN'] = String(requestParameters.xXSRFTOKEN);
-        }
 
         const response = await this.request({
             path: `/match`,
@@ -120,10 +110,6 @@ export class MatchApi extends runtime.BaseAPI {
      * Update a live match with a new matchState
      */
     async updateMatchAndStatesRaw(requestParameters: UpdateMatchAndStatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.xXSRFTOKEN === null || requestParameters.xXSRFTOKEN === undefined) {
-            throw new runtime.RequiredError('xXSRFTOKEN','Required parameter requestParameters.xXSRFTOKEN was null or undefined when calling updateMatchAndStates.');
-        }
-
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateMatchAndStates.');
         }
@@ -137,10 +123,6 @@ export class MatchApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.xXSRFTOKEN !== undefined && requestParameters.xXSRFTOKEN !== null) {
-            headerParameters['X-XSRF-TOKEN'] = String(requestParameters.xXSRFTOKEN);
-        }
 
         const response = await this.request({
             path: `/match/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),

@@ -13,14 +13,14 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   LeagueDto,
-} from '../models/index';
+} from '../models/index.js';
 import {
     LeagueDtoFromJSON,
     LeagueDtoToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 /**
  * 

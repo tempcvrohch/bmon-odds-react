@@ -13,12 +13,12 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   BetDto,
   UserDto,
   UserRegisterDto,
-} from '../models/index';
+} from '../models/index.js';
 import {
     BetDtoFromJSON,
     BetDtoToJSON,
@@ -26,7 +26,7 @@ import {
     UserDtoToJSON,
     UserRegisterDtoFromJSON,
     UserRegisterDtoToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 export interface LoginRequest {
     username?: string;
@@ -34,7 +34,6 @@ export interface LoginRequest {
 }
 
 export interface RegisterRequest {
-    xXSRFTOKEN: string;
     userRegisterDto: UserRegisterDto;
 }
 
@@ -172,10 +171,6 @@ export class UserApi extends runtime.BaseAPI {
      * register a new user.
      */
     async registerRaw(requestParameters: RegisterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserDto>> {
-        if (requestParameters.xXSRFTOKEN === null || requestParameters.xXSRFTOKEN === undefined) {
-            throw new runtime.RequiredError('xXSRFTOKEN','Required parameter requestParameters.xXSRFTOKEN was null or undefined when calling register.');
-        }
-
         if (requestParameters.userRegisterDto === null || requestParameters.userRegisterDto === undefined) {
             throw new runtime.RequiredError('userRegisterDto','Required parameter requestParameters.userRegisterDto was null or undefined when calling register.');
         }
@@ -185,10 +180,6 @@ export class UserApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.xXSRFTOKEN !== undefined && requestParameters.xXSRFTOKEN !== null) {
-            headerParameters['X-XSRF-TOKEN'] = String(requestParameters.xXSRFTOKEN);
-        }
 
         const response = await this.request({
             path: `/auth/register`,

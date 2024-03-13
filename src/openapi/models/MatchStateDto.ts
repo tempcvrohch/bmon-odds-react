@@ -12,13 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { MarketStateDto1 } from './MarketStateDto1';
+import { exists, mapValues } from '../runtime.js';
+import type { MarketStateDto1 } from './MarketStateDto1.js';
 import {
     MarketStateDto1FromJSON,
     MarketStateDto1FromJSONTyped,
     MarketStateDto1ToJSON,
-} from './MarketStateDto1';
+} from './MarketStateDto1.js';
 
 /**
  * 

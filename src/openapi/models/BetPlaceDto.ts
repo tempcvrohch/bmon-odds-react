@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime.js';
 /**
  * A request body of a wager placed by a user on a marketState.
  * @export

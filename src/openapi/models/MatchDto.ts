@@ -12,25 +12,25 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { LeagueDto } from './LeagueDto';
+import { exists, mapValues } from '../runtime.js';
+import type { LeagueDto } from './LeagueDto.js';
 import {
     LeagueDtoFromJSON,
     LeagueDtoFromJSONTyped,
     LeagueDtoToJSON,
-} from './LeagueDto';
-import type { MatchStateDto } from './MatchStateDto';
+} from './LeagueDto.js';
+import type { MatchStateDto } from './MatchStateDto.js';
 import {
     MatchStateDtoFromJSON,
     MatchStateDtoFromJSONTyped,
     MatchStateDtoToJSON,
-} from './MatchStateDto';
-import type { SportDto1 } from './SportDto1';
+} from './MatchStateDto.js';
+import type { SportDto1 } from './SportDto1.js';
 import {
     SportDto1FromJSON,
     SportDto1FromJSONTyped,
     SportDto1ToJSON,
-} from './SportDto1';
+} from './SportDto1.js';
 
 /**
  * 

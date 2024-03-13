@@ -12,25 +12,25 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { LeagueDto } from './LeagueDto';
+import { exists, mapValues } from '../runtime.js';
+import type { LeagueDto } from './LeagueDto.js';
 import {
     LeagueDtoFromJSON,
     LeagueDtoFromJSONTyped,
     LeagueDtoToJSON,
-} from './LeagueDto';
-import type { MatchUpsertDtoMatchState } from './MatchUpsertDtoMatchState';
+} from './LeagueDto.js';
+import type { MatchUpsertDtoMatchState } from './MatchUpsertDtoMatchState.js';
 import {
     MatchUpsertDtoMatchStateFromJSON,
     MatchUpsertDtoMatchStateFromJSONTyped,
     MatchUpsertDtoMatchStateToJSON,
-} from './MatchUpsertDtoMatchState';
-import type { SportDto1 } from './SportDto1';
+} from './MatchUpsertDtoMatchState.js';
+import type { SportDto1 } from './SportDto1.js';
 import {
     SportDto1FromJSON,
     SportDto1FromJSONTyped,
     SportDto1ToJSON,
-} from './SportDto1';
+} from './SportDto1.js';
 
 /**
  * Match between players with markets.

@@ -13,14 +13,14 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   BetDto,
-} from '../models/index';
+} from '../models/index.js';
 import {
     BetDtoFromJSON,
     BetDtoToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 /**
  * 

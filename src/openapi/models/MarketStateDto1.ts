@@ -12,19 +12,19 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { MarketDto } from './MarketDto';
+import { exists, mapValues } from '../runtime.js';
+import type { MarketDto } from './MarketDto.js';
 import {
     MarketDtoFromJSON,
     MarketDtoFromJSONTyped,
     MarketDtoToJSON,
-} from './MarketDto';
-import type { PlayerDto1 } from './PlayerDto1';
+} from './MarketDto.js';
+import type { PlayerDto1 } from './PlayerDto1.js';
 import {
     PlayerDto1FromJSON,
     PlayerDto1FromJSONTyped,
     PlayerDto1ToJSON,
-} from './PlayerDto1';
+} from './PlayerDto1.js';
 
 /**
  * 

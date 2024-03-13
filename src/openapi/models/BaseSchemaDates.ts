@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime.js';
 /**
  * Holds created_at and updated_at auto generated columns.
  * @export

@@ -13,14 +13,14 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   PlayerDto1,
-} from '../models/index';
+} from '../models/index.js';
 import {
     PlayerDto1FromJSON,
     PlayerDto1ToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 /**
  * 

@@ -13,14 +13,14 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   MatchDto,
-} from '../models/index';
+} from '../models/index.js';
 import {
     MatchDtoFromJSON,
     MatchDtoToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 export interface GetMatchesRequest {
     from?: Date;

@@ -13,20 +13,19 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   BetDto,
   BetPlaceDto,
-} from '../models/index';
+} from '../models/index.js';
 import {
     BetDtoFromJSON,
     BetDtoToJSON,
     BetPlaceDtoFromJSON,
     BetPlaceDtoToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 export interface PlaceBetRequest {
-    xXSRFTOKEN: string;
     marketStateId: number;
     betPlaceDto: BetPlaceDto;
 }
@@ -40,10 +39,6 @@ export class BetApi extends runtime.BaseAPI {
      * Place a wager.
      */
     async placeBetRaw(requestParameters: PlaceBetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BetDto>> {
-        if (requestParameters.xXSRFTOKEN === null || requestParameters.xXSRFTOKEN === undefined) {
-            throw new runtime.RequiredError('xXSRFTOKEN','Required parameter requestParameters.xXSRFTOKEN was null or undefined when calling placeBet.');
-        }
-
         if (requestParameters.marketStateId === null || requestParameters.marketStateId === undefined) {
             throw new runtime.RequiredError('marketStateId','Required parameter requestParameters.marketStateId was null or undefined when calling placeBet.');
         }
@@ -57,10 +52,6 @@ export class BetApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.xXSRFTOKEN !== undefined && requestParameters.xXSRFTOKEN !== null) {
-            headerParameters['X-XSRF-TOKEN'] = String(requestParameters.xXSRFTOKEN);
-        }
 
         const response = await this.request({
             path: `/bet/place/{marketStateId}`.replace(`{${"marketStateId"}}`, encodeURIComponent(String(requestParameters.marketStateId))),

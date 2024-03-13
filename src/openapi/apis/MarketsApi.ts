@@ -13,14 +13,14 @@
  */
 
 
-import * as runtime from '../runtime';
+import * as runtime from '../runtime.js';
 import type {
   MarketStateDto1,
-} from '../models/index';
+} from '../models/index.js';
 import {
     MarketStateDto1FromJSON,
     MarketStateDto1ToJSON,
-} from '../models/index';
+} from '../models/index.js';
 
 export interface GetLatestMarketsByMatchIdRequest {
     id: number;
