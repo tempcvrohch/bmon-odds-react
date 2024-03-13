@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { OPEN_API_CONF, CSRF_COOKIE_NAME } from '../Constants/Constants.js';
+import { OPEN_API_CONF, CSRF_COOKIE_NAME, CSRF_HEADER_NAME } from '../Constants/Constants.js';
 import { MarketsApi } from '../openapi/apis/MarketsApi.js';
 import { MarketStateDto } from '../openapi/models/MarketStateDto.js';
 import { RootStore, getCookieValueWithName } from './Store.js';
@@ -26,8 +26,16 @@ class BetStore {
   }
 
   async PlaceBet(marketStateId: number, betPlaceDto: BetPlaceDto) {
-		return this.betApi.placeBetRaw({xXSRFTOKEN: getCookieValueWithName(CSRF_COOKIE_NAME), marketStateId, betPlaceDto, });
-	}
+    return this.betApi.placeBetRaw(
+      { marketStateId, betPlaceDto },
+      { headers: { [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME) } },
+    ).then(async res => {
+			const bet = await res.value();
+			runInAction(() => {
+				this.rootStore.userStore.bets.push(bet);	
+			});
+		});
+  }
 
   async FetchLatestMarketStates(matchId: number) {
     const marketStates = await this.marketsApi.getLatestMarketsByMatchId({ id: matchId });

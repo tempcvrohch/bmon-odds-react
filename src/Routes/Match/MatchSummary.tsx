@@ -43,6 +43,10 @@ function parseIndividualSetScores(sets) {
 }
 
 const MatchSummary = observer((props: { match: MatchDto }) => {
+	if(!props.match.league || !props.match.matchState || !props.match.matchState.marketStates){
+		return (<span>Missing league/match state</span>);
+	}
+
   const foundLeague = findLeagueIdentifier(props.match.league.name.toLowerCase());
   const sets = parseSets(props.match.matchState.setScore);
   const playerScores = parseIndividualSetScores(sets);

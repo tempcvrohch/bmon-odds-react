@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { MarketStateDto } from '../../../openapi/models/MarketStateDto.js';
+import BetConfirmationInfo from './BetConfirmationInfo.js';
 
 export interface ModalDetails {
   open: boolean;
@@ -24,7 +25,7 @@ const BetConfirmation = observer(
     setModalDetails: React.Dispatch<React.SetStateAction<ModalDetails>>;
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
-    const { betStore, toastStore, userStore } = React.useContext(RootStoreContext) as RootStore;
+    const { betStore, toastStore } = React.useContext(RootStoreContext) as RootStore;
     const [loading, setLoading] = useState(false);
 
     const submit = () => {
@@ -40,10 +41,6 @@ const BetConfirmation = observer(
         })
         .then(() => {
           toastStore.snackbarSuccess(`Bet placed successfully!`);
-          if (userStore.user) {
-            userStore.user.pendingBetsAmount++;
-            userStore.user.balance -= +props.modalDetails.stake;
-          }
           closeModal();
         })
         .catch((e) => {
@@ -65,12 +62,14 @@ const BetConfirmation = observer(
         <DialogTitle id="">Confirm Wager(Fulltime Result)</DialogTitle>
         <DialogContent>
           You are about to place <strong>€{props.modalDetails.stake.toString()}</strong> on{' '}
-          <strong>
-            {props.modalDetails.marketState?.player.firstname +
-              ' ' +
-              props.modalDetails.marketState?.player.lastname}{' '}
-            @ {props.modalDetails.marketState?.odd}
-          </strong>
+          {props.modalDetails.marketState && props.modalDetails.marketState.player ? (
+            <BetConfirmationInfo
+              player={props.modalDetails.marketState.player}
+              odd={props.modalDetails.marketState.odd}
+            />
+          ) : (
+            <span>Missing Market Info</span>
+          )}
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={submit} disabled={loading} color="primary">

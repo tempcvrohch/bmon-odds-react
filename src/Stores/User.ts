@@ -32,10 +32,16 @@ class UserStore {
 
   async Register(newUser) {
     return this.userApi
-      .registerRaw({
-        xXSRFTOKEN: getCookieValueWithName(CSRF_COOKIE_NAME),
-        userRegisterDto: newUser,
-      })
+      .registerRaw(
+        {
+          userRegisterDto: newUser,
+        },
+        {
+          headers: {
+            [CSRF_HEADER_NAME]: getCookieValueWithName(CSRF_COOKIE_NAME),
+          },
+        },
+      )
       .then(async (res) => {
         const registeredUser = await res.value();
         runInAction(() => {
@@ -48,10 +54,15 @@ class UserStore {
   async Login(username: string, password: string) {
     return this.userApi
       .loginRaw({ username: username, password: password }, { redirect: 'follow' })
-      .then(async (res) => {
-        const registeredUser = await res.value();
+			// TODO: /login redirects to /session so openapi isn't aware of that and doesn't expect a body. 
+			// .then(async (res) => {
+      //   const registeredUser = await res.value();
+      //   runInAction(() => {
+      //     this.user = registeredUser;
+      //     this.loggedIn = true;
+      //   });
+      .then(async () => {
         runInAction(() => {
-          this.user = registeredUser;
           this.loggedIn = true;
         });
       });

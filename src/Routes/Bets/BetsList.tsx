@@ -84,10 +84,10 @@ const BetsList = observer((props: { bets: BetDto[] }) => {
               >
                 {b.createdAt && <TableCell>{formatDistance(b.createdAt, new Date())}</TableCell>}
                 <TableCell>
-                  {b.marketState.player.firstname} {b.marketState.player.lastname}
+                  {b.marketState?.player && b.marketState.player.firstname} {b.marketState?.player && b.marketState.player.lastname}
                 </TableCell>
-                <TableCell>{b.marketState.odd}</TableCell>
-                <TableCell>{b.marketState.market.name}</TableCell>
+                <TableCell>{b.marketState && b.marketState.odd}</TableCell>
+                <TableCell>{b.marketState?.market && b.marketState.market.name}</TableCell>
                 <TableCell>{b.stake}</TableCell>
                 <TableCell>{b.toReturn?.toFixed(2)}</TableCell>
                 <TableCell>

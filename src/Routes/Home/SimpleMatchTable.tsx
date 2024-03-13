@@ -60,8 +60,8 @@ const SimpleMatchTable = observer((props: { matches: MatchDto[] }) => {
                   }}
                 >
                   <TableCell>{n.name}</TableCell>
-                  <TableCell>{n.league.name}</TableCell>
-                  <TableCell>{n.matchState.setScore}</TableCell>
+                  <TableCell>{n.league && n.league.name}</TableCell>
+                  <TableCell>{n.matchState && n.matchState.setScore}</TableCell>
                   <TableCell>
                     <IconButton
                       aria-label="details"
